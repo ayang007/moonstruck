@@ -5,11 +5,14 @@ function Timezone (props) {
 
         <div class="timezone-out">
             <div class="timezone-in">
-                <div class="pie" style={{"--p":40, "--s":"20deg", "--c": "#6616ad"}}> </div>
+                <div class="pie" style={{"--p":40, "--s":"20deg", "--c": "#ffc8dd"}}> </div>
                 
             </div>
             <div class="timezone-in">
-                <div class="pie" style={{"--p":10, "--s":"10deg", "--c": "#4960e6"}}> </div>
+                <div class="pie" style={{"--p":60, "--s":"10deg", "--c": "#a2d1ff"}}> </div>
+            </div>
+            <div class="timezone-in">
+                <div class="pie" id="piebackground" style={{"--p":100, "--s":"10deg", "--c": "#ffffff"}}> </div>
             </div>
         </div>
     )
