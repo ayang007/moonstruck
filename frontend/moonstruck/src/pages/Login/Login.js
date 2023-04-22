@@ -12,14 +12,15 @@ function Login (props) {
     async function foo() {
         const response = await fetch("http://144.24.15.152:4000/api/users/login", {
             method: 'POST',
-            referrerPolicy: "unsafe_url",
+            mode: "no-cors",
+            referrerPolicy: "unsafe-url",
             headers: {
-              'Content-Type': 'application/json'
-            },
-            body: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              },
+            body: JSON.stringify({
                 "Username": "Shalini-Rohra",
                 "Password": "password1234"
-            }
+            })
           });
         console.log(response.json())
     }
