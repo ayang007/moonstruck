@@ -5,8 +5,8 @@ import './PostIts.css'
 function PostIts (props) {
     // <div class="colorcontainer">
     // </div>
-    const [posX, setPosX] = useState(50);
-    const [posY, setPosY] = useState(50);
+    const [posX, setPosX] = useState((props.mx/100.0)*window.screen.width);
+    const [posY, setPosY] = useState((props.my/100.0)*window.screen.height);
     const [percentageX, setPercentageX] = useState(0);
     const [percentageY, setPercentageY] = useState(0);
 
@@ -35,8 +35,16 @@ function PostIts (props) {
         }, [posX, posY]
     );
 
-    const debouncedVar1 = useDebounce(percentageX, 500);
-    const debouncedVar2 = useDebounce(percentageY, 500);
+
+    const debouncedPX = useDebounce(percentageX, 1000);
+    const debouncedPY = useDebounce(percentageY, 1000);
+
+
+    useEffect(
+        () => {
+            //console.log([debouncedPX, debouncedPY]);
+        }, [debouncedPX, debouncedPY]
+    );
 
     function dragMouseDown(e) {
         e.preventDefault();
@@ -58,10 +66,12 @@ function PostIts (props) {
 
     return (
         <>
-            <div class="postitscontainer" style={{ top: `${posY}px`, left: `${posX}px`, cursor: 'move' }}
+            <div class="postitscontainer" 
+            style={{ top: `${posY}px`, left: `${posX}px`, background: props.mc,
+            transform: "rotate(" + props.mr + "deg)" }}
       onMouseDown={dragMouseDown}>
                 
-                    <p class="postitmessage">message</p>
+                    <p class="postitmessage">{props.message}</p>
             </div>
         </>
     )

@@ -12,6 +12,7 @@ function Fridge (props) {
     function noteSubmit(e) {
         e.preventDefault();
         alert("Make a new post it");
+        setShowWiz(false);
     }
     return (
         <>
@@ -36,7 +37,8 @@ function Fridge (props) {
                 </div>
                 
             </div>
-            <PostIts/>
+            <PostIts mx="20" my="50" mc="aqua" mr="10" message="efjoij"/>
+            <PostIts mx="20" my="20" mc="red" mr="-10" message="easjifoeafeasefaej"/>
         </>
     )
 }
