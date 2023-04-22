@@ -13,6 +13,7 @@ function Login (props) {
         const response = await fetch("http://144.24.15.152:4000/api/users/login", {
             method: 'POST',
             mode: "no-cors",
+            referrerPolicy: "unsafe_url",
             headers: {
               'Content-Type': 'application/json'
             },
