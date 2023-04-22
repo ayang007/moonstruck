@@ -1,7 +1,7 @@
 require('dotenv').config()
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 let User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
-const axios = require('axios');
 
 const getTimezone = async (req, res) => {
     try {
@@ -17,65 +17,80 @@ const getTimezone = async (req, res) => {
             })
         }
 
+        const partner = await User.findOne({
+            Username: user.PartnerID
+        })
+
+        if (!partner) {
+            return res.status(500).json({
+                'error': 'Partner is invalid.'
+            })
+        }
+        const timestamp = Math.floor(Date.now() / 1000);
+
         const userLatitude = user.Latitude;
         const userLongitude = user.Longitude;
-        const timestamp = Math.floor(Date.now() / 1000);
         const apiKey = process.env.GOOGLE_MAPS_API_KEY;
-        const url = 'https://maps.googleapis.com/maps/api/timezone/json?location=' + userLatitude + '%2C' + userLongitude + '&timestamp=' + timestamp + '&key=' + apiKey
-        console.log(url);
+        const userUrl = 'https://maps.googleapis.com/maps/api/timezone/json?location=' + userLatitude + '%2C' + userLongitude + '&timestamp=' + timestamp + '&key=' + apiKey
         
-        const tzResponse = await axios.get(url).catch(err => {
-            console.log(err)                     //Axios entire error message
-            console.log(err.response.data.error) //Google API error message 
-          });
-        /*axios({
-            method: 'get',
-            url: url,
-            responseType: 'stream'
-        }).then((response) => {
-            tzResponse = response;
-        })*/
+        const userTZResponse = await GoogleMapsRequest(userUrl);
 
-        if (!tzResponse || (tzResponse.status === "ZERO_RESULTS")) {
+        if (!userTZResponse || (userTZResponse.status === "ZERO_RESULTS")) {
             return res.status(500).json({
                 'error': 'Invalid Latitude or Longitude coordinates'
             })
         }
 
+        console.log(userTZResponse);
 
-        // https://stackoverflow.com/questions/20712419/get-utc-offset-from-timezone-in-javascript
+        const UserUTCOffset = (userTZResponse.rawOffset) / 3600
 
-        const timezoneID = tzResponse.timeZoneId;
-        console.log(timezoneID);
+        const partnerLatitude = partner.Latitude;
+        const partnerLongitude = partner.Longitude;
+        const partnerUrl = 'https://maps.googleapis.com/maps/api/timezone/json?location=' + partnerLatitude + '%2C' + partnerLongitude + '&timestamp=' + timestamp + '&key=' + apiKey
 
-        const timeZoneName = Intl.DateTimeFormat("ia", {
-            timeZoneName: "short",
-            timezoneID,
-        })
-            .formatToParts()
-            .find((i) => i.type === "timeZoneName").value;
-        const offset = timeZoneName.slice(3);
-        if (!offset) return 0;
-        
-        const matchData = offset.match(/([+-])(\d+)(?::(\d+))?/);
-        if (!matchData) throw `cannot parse timezone name: ${timeZoneName}`;
-        
-        const [, sign, hour, minute] = matchData;
-        let result = parseInt(hour) * 60;
-        if (sign === "+") result *= -1;
-        if (minute) result += parseInt(minute);
-        
-        console.log(result);
-        console.log(typeof(result));
-        const tzDelta = Math.floor(result / 60) * -1;
-        
+        const partnerTZResponse = await GoogleMapsRequest(partnerUrl);
+
+        if (!partnerTZResponse || (partnerTZResponse.status === "ZERO_RESULTS")) {
+            return res.status(500).json({
+                'error': 'Invalid Latitude or Longitude coordinates'
+            })
+        }
+
+        console.log(partnerTZResponse)
+
+        const PartnerUTCOffset = (partnerTZResponse.rawOffset) / 3600
+
         return res.status(200).json({
-            HourDelta: tzDelta
+            HourDelta: PartnerUTCOffset - UserUTCOffset
         })
     } catch (error) {
         console.log(error)
         res.json({ status: 'error', error: 'Invalid token' })
     }
+}
+
+async function GoogleMapsRequest(url) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status >= 200 && xhr.status < 300) {
+            resolve(JSON.parse(xhr.responseText));
+          } else {
+            reject(new Error(xhr.statusText));
+            //resolve(null);
+          }
+        }
+      };
+      xhr.onerror = function () {
+        reject(new Error('Network error'));
+      };
+      xhr.send("");
+    });
+    
 }
 
 module.exports = {
