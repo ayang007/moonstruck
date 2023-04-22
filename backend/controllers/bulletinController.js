@@ -62,7 +62,7 @@ const addPostIt = async (req, res) => {
         });
     } catch (error) {
         return res.status(500).json({
-            'error': 'Token is invalid.'
+            'error': error
         })
     }
 }
@@ -117,7 +117,7 @@ const deletePostIt = async (req, res) => {
         });
     } catch (error) {
         return res.status(500).json({
-            'error': 'Token is invalid.'
+            'error': error
         })
     }
 }
@@ -146,14 +146,97 @@ const getAllPostIts = async (req, res) => {
             })
         }
 
-       
-
         return res.status(200).json({
             "Notes": bulletin.Notes
         });
     } catch (error) {
         return res.status(500).json({
-            'error': 'Token is invalid.'
+            'error': error
+        })
+    }
+}
+
+const setCountdown = async (req, res) => {
+    try {
+        const decoded = jwt.verify(req.body.JWT, process.env.SECRET);
+        const user = await User.findOne({
+            Username: decoded.Username
+        })
+
+        // User's ID does not exist
+        if (!user) {
+            return res.status(500).json({
+                'error': 'Username is invalid.'
+            })
+        }
+
+        const bulletin = await Bulletin.findOne({
+            _id: user.BB
+        })
+
+        if (!bulletin) {
+            return res.status(500).json({
+                'error': 'Bulletin is invalid.'
+            })
+        }
+
+        let bulletinUpdateError = false;
+        bulletin.Countdown = req.body.Meet;
+
+        bulletin.save().catch(() => bulletinUpdateError = true);
+
+        if (bulletinUpdateError) {
+            return res.status(500).json({
+                'error': 'Error updating bulletin document.'
+            });
+        }
+
+        return res.status(200).json({
+            "OK": "OK"
+        });
+    } catch (error) {
+        return res.status(500).json({
+            'error': error
+        })
+    }
+}
+
+const getCountdown = async (req, res) => {
+    try {
+        const decoded = jwt.verify(req.params.JWT, process.env.SECRET);
+        const user = await User.findOne({
+            Username: decoded.Username
+        })
+
+        // User's ID does not exist
+        if (!user) {
+            return res.status(500).json({
+                'error': 'Username is invalid.'
+            })
+        }
+
+        const bulletin = await Bulletin.findOne({
+            _id: user.BB
+        })
+
+        if (!bulletin) {
+            return res.status(500).json({
+                'error': 'Bulletin is invalid.'
+            })
+        }
+
+        if (!bulletin.Countdown) {
+            return res.status(200).json({
+                "Meet": null
+            })
+        }
+
+        return res.status(200).json({
+            "Meet": bulletin.Countdown
+        });
+    } catch (error) {
+        return res.status(500).json({
+            'error': error
         })
     }
 }
@@ -161,5 +244,7 @@ const getAllPostIts = async (req, res) => {
 module.exports = {
     addPostIt,
     deletePostIt,
-    getAllPostIts
+    getAllPostIts,
+    setCountdown,
+    getCountdown,
 }
