@@ -1,4 +1,5 @@
 import fridgeimg from '../../assets/Fridge.png'
+import PostIts from '../PostIts/PostIts'
 import './Fridge.css'
 
 function Fridge (props) {
@@ -6,6 +7,7 @@ function Fridge (props) {
         <>
             <div>
                 <img class="fridge" src={fridgeimg}></img>
+                <PostIts/>
             </div>
         </>
     )
