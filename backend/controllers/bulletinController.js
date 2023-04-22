@@ -1,4 +1,3 @@
-var mongoose = require('mongoose');
 let User = require('../models/userModel');
 const {
     PostIt,

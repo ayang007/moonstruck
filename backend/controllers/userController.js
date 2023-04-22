@@ -212,10 +212,42 @@ const mergeUser = async (req, res) => {
     }
 }
 
+const checkMerge = async (req, res) => {
+    try {
+        const decoded = jwt.verify(req.params.JWT, process.env.SECRET);
+        const user = await User.findOne({
+            Username: decoded.Username
+        })
+
+        // User ID does not exist
+        if (!user) {
+            return res.status(500).json({
+                'error': 'Username is invalid.'
+            })
+        }
+
+        // Username has a partner
+        if (user.PartnerID) {
+            return res.status(200).json({
+                PartnerID: user.PartnerID
+            })
+        } else { // Username does not have a partner
+            return res.status(200).json({
+                PartnerID: null
+            })
+        }
+    } catch (error) {
+        return res.status(500).json({
+            'error': error
+        })
+    }
+}
+
 module.exports = {
     addUser,
     getUser,
     login,
     registerUser,
-    mergeUser
+    mergeUser,
+    checkMerge
 }

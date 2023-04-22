@@ -1,16 +1,23 @@
 .postitscontainer {
     position: absolute;
-    top:10%;
-    left:5%;
+    cursor:move;
     width: 10vh;
     height: 10vh;
-    background: aqua;
-    background-image: url('../../assets/postit1.png');
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-image: url('../../assets/postit1.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
     z-index: 100;
 }
 
+.postit-x {
+    cursor:pointer;
+}
+
 .postitmessage {
-    padding-top:20%;
+    position:relative;
+    top:-12px;
+    padding-left: 5%;
+    padding-right: 5%;
+    overflow-wrap: break-word;
+    font-size: 12px;
 }
