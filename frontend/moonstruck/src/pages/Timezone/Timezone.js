@@ -13,7 +13,7 @@ function Timezone (props) {
             </div>
             <div class="timezone-in">
                 <div class="pie" id="piebackground" style={{"--p":100, "--s":"10deg", "--c": "#ffffff"}}> </div>
-            </div>
+            </div> 
         </div>
     )
     /*return (
