@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const bulletinRoutes = "";
+const bulletinRoutes = require('./routes/bulletinRoutes');
 const locationRoutes = "";
 const timezoneRoutes = "";
 const userRoutes = require('./routes/userRoutes');
@@ -25,9 +25,10 @@ const corsOptions = {
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
   }
-app.use(cors(corsOptions))
+//app.use(cors(corsOptions))
 app.use((req, res, next) => {
-    console.log(req.path, req.method)
+    console.log(req.path, req.method);
+    console.log(req.body);
     next()
 })
 
@@ -35,7 +36,7 @@ app.get('/hello', (req, res) => {
     res.send('Hello world!')
 })
 
-//app.use('/api/bulletins', bulletinRoutes);
+app.use('/api/bb', bulletinRoutes);
 //app.use('/api/locations', locationRoutes);
 //app.use('/api/timezones', timezoneRoutes);
 app.use('/api/users', userRoutes);

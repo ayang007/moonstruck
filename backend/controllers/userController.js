@@ -1,4 +1,8 @@
+var mongoose = require('mongoose');
 let User = require('../models/userModel');
+const {
+    Bulletin
+} = require('../models/bulletinModel');
 const jwt = require('jsonwebtoken');
 
 const addUser = async (req, res) => {
@@ -114,12 +118,14 @@ const mergeUser = async (req, res) => {
             Username: decoded.Username
         })
 
+        // User's ID does not exist
         if (!user) {
             return res.status(500).json({
                 'error': 'Username is invalid.'
             })
         }
 
+        // User already has a partner
         if (user.PartnerID) {
             return res.status(500).json({
                 'error': 'User already has a partner.'
@@ -130,26 +136,45 @@ const mergeUser = async (req, res) => {
             Username: req.body.PartnerID
         })
 
+        // Partner's ID does not exist
         if (!partner) {
             return res.status(500).json({
                 'error': 'Partner is invalid.'
             })
         }
 
+        // Partner already has a partner
         if (partner.PartnerID) {
             return res.status(500).json({
                 'error': 'Partner already has a partner.'
             })
         }
 
+        // Generate the bulletin board
+        var _id = new mongoose.Types.ObjectId(); // ID of the board
+        var bulletinID = _id.toString();
+        console.log(bulletinID);
+        
+        const Notes = [];
+
+        const newBulletinBoard = new Bulletin({
+            _id,
+            Notes
+        });
+
+        // Try to update both the user and the partner
         user.PartnerID = req.body.PartnerID;
+        user.BB = bulletinID;
         partner.PartnerID = decoded.Username;
+        partner.BB = bulletinID;
         
         let userUpdateError = false;
         let partnerUpdateError = false;
+        let bulletinUpdateError = false;
 
         user.save().catch(() => userUpdateError = true);
         partner.save().catch(() => partnerUpdateError = true);
+        newBulletinBoard.save().catch(() => bulletinUpdateError = true);
 
         if (userUpdateError) {
             return res.status(500).json({
@@ -163,12 +188,18 @@ const mergeUser = async (req, res) => {
             });
         }
 
+        if (bulletinUpdateError) {
+            return res.status(500).json({
+                'error': 'Error creating bulletin document.'
+            });
+        }
+
         return res.status(200).json({
             'OK': 'OK'
         });
     } catch (error) {
         return res.status(500).json({
-            'error': 'Token is invalid.'
+            'error': error
         })
     }
 }
