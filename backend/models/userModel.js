@@ -6,7 +6,10 @@ const userSchema = new mongoose.Schema(
         Username: { type: String, required: true},
         Password: { type: String, required: true },
         PartnerID: { type: String, required: false },
-        BB: { type: String, required: false }
+        BB: { type: String, required: false },
+        Latitude: { type: Number, required: true },
+        Longitude: { type: Number, required: true },
+        LocationLastUpdated: { type: Number, required: true}
     },
     { collection: 'user-data' }
 )
