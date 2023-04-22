@@ -64,6 +64,10 @@ function PostIts (props) {
         document.onmousemove = null;
     }
 
+    function deletePostIt() {
+        alert("Kindly delet");
+    }
+
     return (
         <>
             <div class="postitscontainer" 
@@ -71,7 +75,8 @@ function PostIts (props) {
             transform: "rotate(" + props.mr + "deg)" }}
       onMouseDown={dragMouseDown}>
                 
-                    <p class="postitmessage">{props.message}</p>
+                    <p class="postitmessage"><span class="postit-x" onClick={deletePostIt}>X</span>
+                    <br/>{props.message}</p>
             </div>
         </>
     )
