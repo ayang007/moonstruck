@@ -41,8 +41,6 @@ const getTimezone = async (req, res) => {
             })
         }
 
-        console.log(userTZResponse);
-
         const UserUTCOffset = (userTZResponse.rawOffset) / 3600
 
         const partnerLatitude = partner.Latitude;
@@ -56,8 +54,6 @@ const getTimezone = async (req, res) => {
                 'error': 'Invalid Latitude or Longitude coordinates'
             })
         }
-
-        console.log(partnerTZResponse)
 
         const PartnerUTCOffset = (partnerTZResponse.rawOffset) / 3600
 
@@ -81,7 +77,6 @@ async function GoogleMapsRequest(url) {
             resolve(JSON.parse(xhr.responseText));
           } else {
             reject(new Error(xhr.statusText));
-            //resolve(null);
           }
         }
       };
