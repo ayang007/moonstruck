@@ -5,7 +5,6 @@ function Map (props) {
     return (
         <>
             <div class="weathercontainer">
-                <img class="weather" src={weatherimg}></img>
             </div>
         </>
     )
