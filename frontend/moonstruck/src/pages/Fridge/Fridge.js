@@ -1,0 +1,5 @@
+function Fridge (props) {
+    return {
+        
+    }
+}
