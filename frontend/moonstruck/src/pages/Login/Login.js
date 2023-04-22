@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../App";
 import {  useNavigate } from "react-router-dom";
+import APIRequest from "../../util/APIRequest";
 
 function Login (props) {
     const navigate = useNavigate();
@@ -9,29 +10,29 @@ function Login (props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    async function foo() {
-        const response = await fetch("http://144.24.15.152:4000/api/users/login", {
-            method: 'POST',
-            mode: "no-cors",
-            referrerPolicy: "unsafe-url",
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-              },
-            body: JSON.stringify({
-                "Username": "Shalini-Rohra",
-                "Password": "password1234"
-            })
-          });
-        console.log(response.json())
+
+    async function loginRequest() {
+        var response = 0;
+        try {
+            response = await APIRequest("POST", "users/login", {
+                "Username": username,
+                "Password": password
+            });
+        } catch (error) {
+            alert("Your username and/or password were incorrect.");
+            return;
+        }
+        console.log("Response foo:")
+        console.log(response);
+        props.setAuth(response.JWT);
+        navigate("/dashboard");
     }
 
-    useEffect(() => {
-        foo();
-    }, []);
 
     const loginSubmit = (e) => {
         // Prevent page reload
         e.preventDefault();
+        loginRequest();
       };
 
     return (

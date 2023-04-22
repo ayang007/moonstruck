@@ -49,7 +49,9 @@ const login = async (req, res) => {
         }, process.env.SECRET)
 
         //return res.json({ status: 'ok', user: true })
-        return res.status(200).json(token);
+        return res.status(200).json({
+            JWT: token
+        });
     } else {
         return res.status(500).json({ status: 'error', user: false})
     }
@@ -88,11 +90,17 @@ const registerUser = async (req, res) => {
         const _id = req.body.Username;
         const Username = req.body.Username;
         const Password = req.body.Password;
+        const Latitude = 0;
+        const Longitude = 0;
+        const LocationLastUpdated = Math.floor(Date.now() / 1000);
 
         const newUser = new User({
             _id,
             Username, 
             Password,
+            Latitude,
+            Longitude,
+            LocationLastUpdated,
         });
 
         const token = jwt.sign({

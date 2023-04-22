@@ -1,17 +1,45 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../App";
+import APIRequest from "../../util/APIRequest";
+import {  useNavigate } from "react-router-dom";
+
 
 function Register (props) {
+    const navigate = useNavigate();
     const auth = useContext(AuthContext);
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirm, setConfirm] = useState("");
 
+    async function regRequest() {
+        var response = 0;
+        try {
+            response = await APIRequest("PUT", "users/auth", {
+                "Username": username,
+                "Password": password
+            });
+        } catch (error) {
+            alert("An error was encountered during registration.");
+            return;
+        }
+        console.log("Response signup foo:")
+        console.log(response);
+        props.setAuth(response.JWT);
+        navigate("/dashboard");
+    }
+
+
     const regSubmit = (e) => {
-        // Prevent page reload
         e.preventDefault();
+        if(confirm === password) {
+            regRequest();
+        }
+        else {
+            alert("The two passwords do not match");
+        }
       };
+
     return (
         <>
         <h1>Register</h1>
