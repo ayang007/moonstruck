@@ -70,7 +70,6 @@ const addPostIt = async (req, res) => {
 
 const deletePostIt = async (req, res) => {
     try {
-        console.log('Test 1')
         const decoded = jwt.verify(req.body.JWT, process.env.SECRET);
         const user = await User.findOne({
             Username: decoded.Username
@@ -124,7 +123,44 @@ const deletePostIt = async (req, res) => {
     }
 }
 
+const getAllPostIts = async (req, res) => {
+    try {
+        const decoded = jwt.verify(req.params.JWT, process.env.SECRET);
+        const user = await User.findOne({
+            Username: decoded.Username
+        })
+
+        // User's ID does not exist
+        if (!user) {
+            return res.status(500).json({
+                'error': 'Username is invalid.'
+            })
+        }
+
+        const bulletin = await Bulletin.findOne({
+            _id: user.BB
+        })
+
+        if (!bulletin) {
+            return res.status(500).json({
+                'error': 'Bulletin is invalid.'
+            })
+        }
+
+       
+
+        return res.status(200).json({
+            "Notes": bulletin.Notes
+        });
+    } catch (error) {
+        return res.status(500).json({
+            'error': 'Token is invalid.'
+        })
+    }
+}
+
 module.exports = {
     addPostIt,
-    deletePostIt
+    deletePostIt,
+    getAllPostIts
 }
