@@ -1,8 +1,7 @@
 require('dotenv').config()
 
 const bulletinRoutes = require('./routes/bulletinRoutes');
-const locationRoutes = "";
-const timezoneRoutes = "";
+const locationRoutes = require('./routes/locationRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 const express = require('express');
@@ -40,8 +39,7 @@ app.get('/hello', (req, res) => {
 })
 
 app.use('/api/bb', bulletinRoutes);
-//app.use('/api/locations', locationRoutes);
-//app.use('/api/timezones', timezoneRoutes);
+app.use('/api/loc', locationRoutes);
 app.use('/api/users', userRoutes);
 
 app.listen(process.env.PORT, () => {
