@@ -15,8 +15,8 @@ const updateLocation = async (req, res) => {
             })
         }
 
-        const potentialLatitude = parseInt(req.body.Latitude);
-        const potentialLongitude = parseInt(req.body.Longitude);
+        const potentialLatitude = parseFloat(req.body.Latitude);
+        const potentialLongitude = parseFloat(req.body.Longitude);
 
         if (isNaN(potentialLatitude)) {
             return res.status(500).json({

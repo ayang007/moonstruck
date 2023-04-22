@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const bulletinRoutes = require('./routes/bulletinRoutes');
 const locationRoutes = require('./routes/locationRoutes');
+const timezoneRoutes = require('./routes/timezoneRoutes');
 const userRoutes = require('./routes/userRoutes');
 
 const express = require('express');
@@ -40,6 +41,7 @@ app.get('/hello', (req, res) => {
 
 app.use('/api/bb', bulletinRoutes);
 app.use('/api/loc', locationRoutes);
+app.use('/api/tz', timezoneRoutes);
 app.use('/api/users', userRoutes);
 
 app.listen(process.env.PORT, () => {
