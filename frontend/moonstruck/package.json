@@ -1,5 +1,6 @@
 {
   "name": "moonstruck",
+  "homepage": "./moonstruck/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
