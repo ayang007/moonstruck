@@ -16,18 +16,26 @@ function Dashboard (props) {
                 <Magpie/>
                 <Countdown/>
             </div>
-            <div class="row">
+            <div class="dashboardrow">
                 <div class="block">
-                    <Timezone/>
-                    <Map/>
+                    <div class="subdiv">
+                        <Timezone/>
+                    </div>
+                    <div class="subdiv">
+                        <Map/>
+                    </div>
                 </div>
                 <div class="block">
                     <Fridge/>
                 </div>
                 
                 <div class="block">
-                    <Weather/>
-                    <PeriodCalendar/>
+                    <div class="subdiv">
+                        <Weather/>
+                    </div>
+                    <div class="subdiv">
+                        <PeriodCalendar/>
+                    </div>
                 </div>
             </div>
             

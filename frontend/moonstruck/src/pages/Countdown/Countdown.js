@@ -2,7 +2,7 @@ import './Countdown.css'
 
 function Countdown (props) {
     return (
-        <div class="container">
+        <div class="countdowncontainer">
             <h1 id="headline">Countdown to the next time we meet</h1>
             <div id="countdown">
                 <ul>

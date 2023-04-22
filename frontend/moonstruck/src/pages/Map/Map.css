@@ -1,10 +1,8 @@
 .mapcontainer {
     float: right;
     width: 300px;
-    padding: 10px;
 }
     
 .map {
-    width: 300px;
-    border: 10px;
+    width: inherit;
 }
