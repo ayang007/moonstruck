@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 // https://stackoverflow.com/questions/19695058/how-to-define-object-in-array-in-mongoose-schema-correctly-with-2d-geo-index
 const postItSchema = new mongoose.Schema({
-    NoteID: { type: Number, required: true },
+    _id: { type: Number, required: true },
     PosX: { type: Number, required: true },
     PosY: { type: Number, required: true },
     Rotation: { type: Number, required: true },
