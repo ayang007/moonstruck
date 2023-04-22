@@ -1,5 +1,13 @@
-function Weather (props) {
+import weatherimg from '../../assets/Weather_Mask.png'
+import './Weather.css'
+
+function Map (props) {
     return (
-        <h1>weather</h1>
+        <>
+            <div class="weathercontainer">
+                <img class="weather" src={weatherimg}></img>
+            </div>
+        </>
     )
 }
+export default Map

@@ -1,0 +1,13 @@
+.countdowncontainer {
+}
+    
+.countdown {
+    width: 30vw;
+    height: 70vh;
+    border: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: block;
+}
