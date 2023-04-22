@@ -17,7 +17,7 @@ function Dashboard (props) {
                 <Countdown/>
             </div>
             <div class="dashboardrow">
-                <div class="block">
+                <div class="dashboardblock">
                     <div class="subdiv">
                         <Timezone/>
                     </div>

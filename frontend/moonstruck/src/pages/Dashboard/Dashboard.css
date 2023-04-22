@@ -1,9 +1,4 @@
-* {
-    background-image: url('../../assets/Background.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
-}
+
 
 .dashboardrow {
     width: 100%;
@@ -12,7 +7,7 @@
     justify-content: center;
 }
 
-.block {
+.dashboardblock {
     display: inline-block;
     border-style: dashed;
     border-width: 5px;

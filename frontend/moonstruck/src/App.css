@@ -1,8 +1,13 @@
 
-/*.App {
-  text-align: center;
+.App {
+    background-image: url('./assets/Background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
 }
-
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
