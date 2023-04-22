@@ -4,6 +4,7 @@ const bulletinRoutes = require('./routes/bulletinRoutes');
 const locationRoutes = require('./routes/locationRoutes');
 const timezoneRoutes = require('./routes/timezoneRoutes');
 const userRoutes = require('./routes/userRoutes');
+const weatherRoutes = require('./routes/weatherRoutes');
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -43,6 +44,7 @@ app.use('/api/bb', bulletinRoutes);
 app.use('/api/loc', locationRoutes);
 app.use('/api/tz', timezoneRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/weather', weatherRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log('Connected to database and listening on port', process.env.PORT)

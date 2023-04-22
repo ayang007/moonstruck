@@ -53,6 +53,7 @@ const updateLocation = async (req, res) => {
     }
 }
 
+// Get location of the partner
 const getLocation = async (req, res) => {
     try {
         const decoded = jwt.verify(req.params.JWT, process.env.SECRET);
@@ -67,12 +68,21 @@ const getLocation = async (req, res) => {
             })
         }
 
+        const partner = await User.findOne({
+            Username: user.PartnerID
+        })
 
+        // Partner's ID does not exist
+        if (!partner) {
+            return res.status(500).json({
+                'error': 'Partner is invalid.'
+            })
+        }
 
         return res.status(200).json({
-            'Latitude': user.Latitude,
-            'Longitude': user.Longitude,
-            'LastUpdated': user.LocationLastUpdated,
+            'Latitude': partner.Latitude,
+            'Longitude': partner.Longitude,
+            'LastUpdated': partner.LocationLastUpdated,
         });
     } catch (error) {
         return res.status(500).json({
