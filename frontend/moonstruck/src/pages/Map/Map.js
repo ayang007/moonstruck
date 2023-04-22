@@ -1,4 +1,4 @@
-import mapimg from '../../assets/Blob_Mask.png'
+import blobmaskimg from '../../assets/Blob_Mask_blackandwhite.svg'
 import heartgif from '../../assets/beatingheart2.gif'
 import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -37,17 +37,19 @@ function Map (props) {
         <>
             <div class="mapcontainer">
                 <span>Last Updated: {time2TimeAgo(locData.LastUpdated)}</span>
-                <MapContainer className="map" center={[locData.Latitude, locData.Longitude]} zoom={5} scrollWheelZoom={false}>
-                    <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    />
-                    <Marker icon={myIcon} position={[locData.Latitude, locData.Longitude]}>
-                        <Popup>
-                            <span>{locData.Latitude + ", " + locData.Longitude}</span>
-                        </Popup>
-                    </Marker>
-                </MapContainer>
+                    <div id="mapbackground">
+                        <MapContainer className="map" center={[locData.Latitude, locData.Longitude]} zoom={5} scrollWheelZoom={false}>
+                            <TileLayer
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+                            <Marker icon={myIcon} position={[locData.Latitude, locData.Longitude]}>
+                                <Popup>
+                                    <span>{locData.Latitude + ", " + locData.Longitude}</span>
+                                </Popup>
+                            </Marker>
+                        </MapContainer>
+                    </div>
                <span>Are you in a new place? Update your own location! 
                 <button onClick={grabUser}>&#128147;&#128205;</button>
                 (Location given: {browserGeo[0] + ", " + browserGeo[1]})

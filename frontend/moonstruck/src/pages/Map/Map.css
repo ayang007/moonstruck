@@ -1,11 +1,18 @@
 .mapcontainer {
-    
     float: right;
     width: 100%;
+    color: #a2d1ff;
 }
-    
+
 .map {
     height: 300px;
     border: 10px;
     width: inherit;
+}
+
+#mapbackground {
+    z-index: 1;
+    mask: url(../../assets/Blob_Mask_blackandwhite.svg);
+    mask-size: contain;
+    mask-repeat: no-repeat;
 }
