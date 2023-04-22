@@ -3,14 +3,14 @@ import './Countdown.css'
 function Countdown (props) {
     return (
         <div class="countdowncontainer">
-            <h1 id="headline">Countdown to the next time we meet</h1>
-            <div id="countdown">
+            <h1>Countdown to the next time we meet</h1>
+            <div class="countdown">
                 <ul>
-                    <li><span id="months"></span>months</li>
-                    <li><span id="days"></span>days</li>
-                    <li><span id="hours"></span>hours</li>
-                    <li><span id="minutes"></span>minutes</li>
-                    <li><span id="seconds"></span>seconds</li>
+                    <li><span>11</span>months</li>
+                    <li><span>217</span>days</li>
+                    <li><span>13</span>hours</li>
+                    <li><span>42</span>minutes</li>
+                    <li><span>09</span>seconds</li>
                 </ul>
             </div>
         </div>
