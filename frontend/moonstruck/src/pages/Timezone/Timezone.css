@@ -16,11 +16,15 @@
     inherits: true;
     initial-value: blue;
   }
-  
+  .tz-center {
+    display: flex; 
+    justify-content: center;
+  }
+
   .timezone-out {
     position: relative;
     margin: 0px;
-    padding: 15vh;
+    padding: 12vh;
   }
   
 
