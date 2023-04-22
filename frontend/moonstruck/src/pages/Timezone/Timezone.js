@@ -1,21 +1,40 @@
 import './Timezone.css'
 
 function Timezone (props) {
-    return (
+    const diff = -3;
 
-        <div class="timezone-out">
-            <div class="timezone-in">
-                <div class="pie" style={{"--p":40, "--s":"20deg", "--c": "#ffc8dd"}}> </div>
+    function diff2Deg(d) {
+        if(d < 0) {
+            return Math.round((d + 24) * 15);
+        }
+        return Math.round(d*15);
+    }
+    return (
+        <>
+            <span class="tz-center">Your partner is {diff < 0? (-1*diff) + " hours behind" : diff + " hours ahead"}</span>
+            <div class="timezone-out">
+                <div class="timezone-in">
+                    <div class="pie" style={{"--p":58, "--s":"0deg", "--c": "#ffc8dd"}}> 24h</div>
+                    
+                </div>
+                <div class="timezone-in">
+                    <div class="pie" style={{"--p":58, "--s":diff2Deg(diff)+"deg", "--c": "#a2d1ff"}}> </div>
+                </div>
+                <div class="timezone-in">
+                    <div class="pie" id="piebackground" style={{"--p":100, "--s":"10deg", "--c": "#ffffff"}}> </div>
+                </div> 
                 
             </div>
-            <div class="timezone-in">
-                <div class="pie" style={{"--p":60, "--s":"10deg", "--c": "#a2d1ff"}}> </div>
-            </div>
-            <div class="timezone-in">
-                <div class="pie" id="piebackground" style={{"--p":100, "--s":"10deg", "--c": "#ffffff"}}> </div>
-            </div>
-        </div>
+            
+            <span class="tz-center">
+                <span style={{color: "#4e2da8"}}>{"None "}</span>
+                <span style={{color: "#a37fc4"}}>{"You "} </span>
+                <span style={{color: "#8281d2"}}>{"Partner "} </span>
+                <span style={{color: "#acabe0"}}>{"Both "} </span>
+            </span>
+        </>
     )
+    // #4e2da8 #a37fc4 #8281d2 #acabe0
     /*return (
         <body class="timezonecontainer">
             <div class="skill">
