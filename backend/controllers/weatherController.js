@@ -53,7 +53,7 @@ const getWeather = async (req, res) => {
             clouds = true;
         }
 
-        if ((weatherResponse.sys.dt < weatherResponse.sys.sunrise) || (weatherResponse.sys.dt < weatherResponse.sys.sunset)) {
+        if ((weatherResponse.dt < weatherResponse.sys.sunrise) || (weatherResponse.dt > weatherResponse.sys.sunset)) {
             day = false;
         }
 
