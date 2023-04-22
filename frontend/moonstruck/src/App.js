@@ -17,7 +17,7 @@ function App() {
             <Route index element={<Dashboard />} />
 
             <Route path="/login" element={<Login setAuth={setAuth} />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/register" element={<Register setAuth={setAuth} />} />
             <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </AuthContext.Provider>

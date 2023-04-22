@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../App";
 import {  useNavigate } from "react-router-dom";
+import APIRequest from "../../util/APIRequest";
 
 function Login (props) {
     const navigate = useNavigate();
@@ -9,62 +10,29 @@ function Login (props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    async function foo() {
-        /*
-        const response = await fetch("https://mighty-badlands-72624.herokuapp.com/http://144.24.15.152:4000/api/users/login", {
-            method: 'POST',
-            mode: "no-cors",
-            referrerPolicy: "unsafe-url",
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-              },
-            body: JSON.stringify({
-                "Username": "Shalini-Rohra",
-                "Password": "password1234"
-            })
-          });
-                  console.log(response.json());
-          */
-         
-          return new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', "https://mighty-badlands-72624.herokuapp.com/http://144.24.15.152:4000/api/users/login", true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.onreadystatechange = function () {
-              if (xhr.readyState === 4) {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                  resolve(xhr.responseText);
-                } else {
-                  reject(new Error(xhr.statusText));
-                }
-              }
-            };
-            xhr.onerror = function () {
-              reject(new Error('Network error'));
-            };
-            xhr.send(JSON.stringify({
-                "Username": "Shalini-Rohra",
-                "Password": "password1234"
-            }));
-          });
-          
-    }
 
-    async function bar() {
-
-        const response = await foo();
+    async function loginRequest() {
+        var response = 0;
+        try {
+            response = await APIRequest("POST", "users/login", {
+                "Username": username,
+                "Password": password
+            });
+        } catch (error) {
+            alert("Your username and/or password were incorrect.");
+            return;
+        }
         console.log("Response foo:")
         console.log(response);
+        props.setAuth(response.JWT);
+        navigate("/dashboard");
     }
 
-    useEffect(() => {
-        bar();
-    }, []);
 
     const loginSubmit = (e) => {
         // Prevent page reload
         e.preventDefault();
+        loginRequest();
       };
 
     return (
