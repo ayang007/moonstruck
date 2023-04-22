@@ -5,8 +5,9 @@ const locationRoutes = "";
 const timezoneRoutes = "";
 const userRoutes = require('./routes/userRoutes');
 
-const express = require('express')
-const mongoose = require('mongoose')
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const cors = require('cors')
 
 const app = express()
@@ -26,6 +27,8 @@ const corsOptions = {
     optionSuccessStatus: 200
   }
 //app.use(cors(corsOptions))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use((req, res, next) => {
     console.log(req.path, req.method);
     console.log(req.body);
