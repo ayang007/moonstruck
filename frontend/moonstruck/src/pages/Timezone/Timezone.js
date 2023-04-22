@@ -16,7 +16,7 @@ function Timezone (props) {
                                     <div class="percent">
                                         <svg>
                                             <circle cx="70" cy="70" r="100"></circle>
-                                            <circle cx="70" cy="70" r="50"></circle>
+                                            <circle cx="70" cy="70" r="150"></circle>
                                         </svg>
                                         <div class="number">
                                             <h2>7:00<span>am</span></h2>
