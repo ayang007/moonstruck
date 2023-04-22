@@ -1,4 +1,5 @@
 async function APIRequest(method, resource, body ) {
+    console.log("API Request: " + method + " - " + resource);
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open(method, "https://mighty-badlands-72624.herokuapp.com/http://144.24.15.152:4000/api/" + resource, true);
