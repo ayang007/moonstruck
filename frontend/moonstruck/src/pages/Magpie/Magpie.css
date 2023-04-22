@@ -1,0 +1,10 @@
+.magpiecontainer {
+    float: left;
+    left: 0vw;
+    top: 5vh;
+}
+    
+.magpie {
+    width: 400px;
+    border: 10px;
+}
