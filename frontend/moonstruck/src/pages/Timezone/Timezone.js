@@ -2,26 +2,30 @@ import './Timezone.css'
 
 function Timezone (props) {
     return (
-        <div timezonecontainer>
-            <div class="container">
-                        <div class="card">
-                                <div>
-                                    <div class="percent">
-                                        <svg class="circlecontainer">
-                                            <circle cx="70" cy="70" r="100"></circle>
-                                            <circle cx="70" cy="70" r="100"></circle>
-                                            <circle cx="70" cy="70" r="100"></circle>
-                                        </svg>
-                                        <div class="number">
-                                            <h2>7:00<span>am</span>-1:00<span>pm</span></h2>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-        </div>
 
+        <div class="timezone-out">
+            <div class="timezone-in">
+                <div class="pie" style={{"--p":40, "--s":"20deg", "--c": "#ffc8dd"}}> </div>
+                
+            </div>
+            <div class="timezone-in">
+                <div class="pie" style={{"--p":60, "--s":"10deg", "--c": "#a2d1ff"}}> </div>
+            </div>
+            <div class="timezone-in">
+                <div class="pie" id="piebackground" style={{"--p":100, "--s":"10deg", "--c": "#ffffff"}}> </div>
+            </div>
+        </div>
     )
+    /*return (
+        <body class="timezonecontainer">
+            <div class="skill">
+                <div class="outer">
+                    <div class="inner"></div>
+                </div>
+            </div>
+        </body>
+
+    )*/
 }
 
 export default Timezone;

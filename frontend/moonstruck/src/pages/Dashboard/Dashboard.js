@@ -2,7 +2,6 @@ import Timezone from "../Timezone/Timezone";
 import Fridge from "../Fridge/Fridge";
 import Countdown from "../Countdown/Countdown";
 import Magpie from "../Magpie/Magpie";
-import PostIts from "../PostIts/PostIts";
 import Map from "../Map/Map";
 import PeriodCalendar from "../Period/Period";
 import Weather from "../Weather/Weather";
@@ -16,22 +15,30 @@ function Dashboard (props) {
                 <Magpie/>
                 <Countdown/>
             </div>
-            <div class="row">
-                <div class="block">
-                    <Timezone/>
-                    <Map/>
+            <div class="dashboardrow">
+                <div class="dashboardblock">
+                    <div class="subdiv">
+                        <Timezone/>
+                    </div>
+                    <div class="subdiv">
+                        <Map/>
+                    </div>
                 </div>
                 <div class="block">
                     <Fridge/>
                 </div>
                 
                 <div class="block">
-                    <Weather/>
-                    <PeriodCalendar/>
+                    <div class="subdiv">
+                        <Weather/>
+                    </div>
+                    <div class="subdiv">
+                        <PeriodCalendar/>
+                    </div>
                 </div>
             </div>
             
-            <PostIts/>
+
         </>
     )
 }
