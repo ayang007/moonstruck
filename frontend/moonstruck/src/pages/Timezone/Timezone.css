@@ -16,8 +16,6 @@
 {
     width: 30vw;
     height: 30vw;
-    border-style: solid;
-    border-color: #ff0461;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -26,10 +24,8 @@
 .container .card
 {
     position: relative;
-    width: 300px;
-    height: 300px;
-    border-style: solid;
-    border-width: 10px;
+    width: inherit;
+    height: inherit;
     text-align: center;
     align-items: center;
     z-index: 10;
