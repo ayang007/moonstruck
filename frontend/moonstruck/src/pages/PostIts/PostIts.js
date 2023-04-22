@@ -5,8 +5,8 @@ import './PostIts.css'
 function PostIts (props) {
     // <div class="colorcontainer">
     // </div>
-    const [posX, setPosX] = useState(0);
-    const [posY, setPosY] = useState(0);
+    const [posX, setPosX] = useState(50);
+    const [posY, setPosY] = useState(50);
     const [percentageX, setPercentageX] = useState(0);
     const [percentageY, setPercentageY] = useState(0);
 
