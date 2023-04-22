@@ -24,7 +24,7 @@ function Login (props) {
         }
         console.log("Response foo:")
         console.log(response);
-        props.setAuth(response[JWT]);
+        props.setAuth(response.JWT);
         navigate("/dashboard");
     }
 
