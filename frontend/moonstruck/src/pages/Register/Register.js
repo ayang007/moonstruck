@@ -26,7 +26,7 @@ function Register (props) {
         console.log("Response signup foo:")
         console.log(response);
         props.setAuth(response.JWT);
-        navigate("/dashboard");
+        navigate("/onboard");
     }
 
 
