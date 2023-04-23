@@ -17,7 +17,13 @@ html {
   cursor: url('./assets/handcursorsmolest.png'), auto;
 }
 
-  
+button {
+  cursor: url('./assets/pointingcursorsmolest.png'), auto;
+}
+
+input[type=submit] {
+  cursor: url('./assets/pointingcursorsmolest.png'), auto;
+}
 
 .App {
   width: 100vw;
