@@ -8,6 +8,7 @@
     margin-bottom: auto;
     display: block;
     max-width: 300px;
+    cursor:url('../../assets/pointingcursorsmolest.png'), auto !important;
 }
 
 
@@ -50,14 +51,11 @@
 .color-selector td:nth-child(5) {
     background-color:#a2d1ff
 }
-input[type=submit] {
+.fridge-sub {
     position: relative;
     top: 40px;
 }
-input[type=color] {
-    position: relative;
-    top: 2px;
-}
+
 .glass {
     padding-left: 10px;
     width: 90%;
