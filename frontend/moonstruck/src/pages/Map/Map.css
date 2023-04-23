@@ -4,12 +4,14 @@
     color: #a2d1ff;
     font-size: 12px;
     align-items: right;
+    cursor: url('../../assets/grabcursorsmolest.png'), auto !important;
 }
 
 .map {
     height: 250px;
     border: 10px;
     width: inherit;
+    cursor: url('../../assets/grabcursorsmolest.png'), auto !important;
 }
 
 #mapbackground {

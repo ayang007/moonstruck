@@ -13,12 +13,10 @@ html {
   background-attachment: fixed;
   background-size: cover;
   
-
-}
-
-* {
   cursor: url('./assets/handcursorsmolest.png'), auto;
 }
+
+  
 
 .App {
   width: 100vw;
