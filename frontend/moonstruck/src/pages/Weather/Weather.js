@@ -5,6 +5,7 @@ import windowimg from '../../assets/Window.png'
 import sunimg from '../../assets/sun.png'
 import cloudimg from '../../assets/clouds.png'
 import rainimg from '../../assets/rain.png'
+import curtainsimg from '../../assets/curtains.GIF'
 import './Weather.css'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from "../../App";
@@ -43,6 +44,7 @@ function Map (props) {
             <br />{wData.temperature + " F"}</div>}
             <div onClick={()=>{setShowTip(!showTip)}} class="weathercontainer">
                 <img src={windowimg} class="window"/>
+                <img src={curtainsimg} class="curtains"/>
                 {wData.day&&<img src={dayimg} class="sky"/>}
                 {!wData.day&&<img src={nightimg} class="sky"/>}
                 <img src={sunimg} class="sky"/>
