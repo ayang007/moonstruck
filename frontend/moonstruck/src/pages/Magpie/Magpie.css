@@ -8,4 +8,6 @@
 .magpie {
     width: 400px;
     border: 10px;
+    cursor:url('../../assets/pointingcursorsmolest.png'), auto !important;
 }
+
