@@ -105,7 +105,8 @@ function Onboard (props) {
             }
         }
         catch(error) {
-            alert("Couldn't query server for meeting date. ")
+            // quiet 
+            //alert("Couldn't query server for meeting date. ")
         }
     }
 

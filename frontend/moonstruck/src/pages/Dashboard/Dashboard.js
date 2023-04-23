@@ -6,6 +6,7 @@ import Map from "../Map/Map";
 import PeriodCalendar from "../Period/Period";
 import Weather from "../Weather/Weather";
 import { AuthContext } from "../../App";
+import gearimg from '../../assets/gear-onboard.png';
 
 
 import './Dashboard.css'
@@ -25,6 +26,9 @@ function Dashboard (props) {
  
     return (
         <>
+        <button class="dashboard-onb" onClick={()=>navigate('/onboard')}>
+        <img width="40" height="40" src={gearimg} />
+        </button>
             <div class="toppanel">
                 <Magpie/>
                 <Countdown/>

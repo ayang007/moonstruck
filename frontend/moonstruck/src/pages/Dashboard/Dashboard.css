@@ -15,6 +15,12 @@
     height: 600;
 }
 
+.dashboard-onb {
+    position:absolute;
+    top: 10px;
+    left: 10px;
+}
+
 
 .toppanel {
     width: 95vw;
