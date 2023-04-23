@@ -20,17 +20,21 @@
     left: 40px;
   }
   .color-selector {
-    width: 156.25px;
-    height: 31.25px;
-    position: absolute;
-    left: -3px;
-    bottom: -20px;
-    background-color: white;
+    width: 125px;
+    height: 25px;
+    position: fixed;
+    left: 9px;
+    top: 80px;
 }
+
+
 .color-selector tr {
-    background-color: rgb(255, 255, 255);
-    color: white;
+    width: 140px;
 }
+.color-selector td {
+    width: 50px;
+}
+
 .color-selector td:nth-child(1) {
     background-color:#cdb4db
 }
@@ -48,9 +52,21 @@
 }
 input[type=submit] {
     position: relative;
-    top: 50px;
+    top: 40px;
 }
 input[type=color] {
     position: relative;
     top: 2px;
+}
+.glass {
+    padding-left: 10px;
+    width: 90%;
+    height: 21vh;
+    border-radius: 10%;
+    background-color: rgba(255, 255, 255, 0.297);
+    backdrop-filter: blur(4px);
+    box-shadow: 6px 10px 16px #6616ad,-6px -8px 16px #bde0fe;
+    position: relative;
+    right: 0px;
+    bottom: 10px;
 }

@@ -9,10 +9,6 @@
 
 .dashboardblock {
     display: inline-block;
-    border-style: dashed;
-    border-width: 5px;
-    border-color: #ff8fc1;
-    border-radius: 10px;
     margin: 10px;
     width: 30vw;
     margin-top: 0px;
@@ -28,8 +24,4 @@
     margin-right: auto;
     align-items: center;
     justify-content: center;
-    border-style: dashed;
-    border-width: 5px;
-    border-color: #ff8fc1;
-    border-radius: 10px;
 }

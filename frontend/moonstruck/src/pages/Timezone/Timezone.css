@@ -19,6 +19,9 @@
   .tz-center {
     display: flex; 
     justify-content: center;
+    color: #cc81d2;
+    background-color: black;
+    border-radius: 4px;
   }
 
   .timezone-out {
@@ -30,7 +33,7 @@
 
   .timezone-in {
 	position: absolute;
-    top: 10%;
+    top: 5%;
    left: 50%;
    transform: translateX(-50%);
 

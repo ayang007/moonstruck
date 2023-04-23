@@ -48,6 +48,7 @@ function PeriodCalendar (props) {
     return (
         <>
             <div class="periodcontainer">
+                <p>PERIOD CALENDAR</p>
                 <img class="period" src={periodimg}></img>
                 <div class="table-calendar">
                     <table>
