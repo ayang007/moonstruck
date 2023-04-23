@@ -3,7 +3,6 @@ import { AuthContext } from "../../App";
 import {  useNavigate } from "react-router-dom";
 import APIRequest from "../../util/APIRequest";
 import './Login.css'
-
 function Login (props) {
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
@@ -38,10 +37,9 @@ function Login (props) {
 
     return (
         <>
+        <div class="backgrounds"></div>
         <div class="main">
             <h1>Login</h1>
-            <p>My token is {auth}</p>
-
             <form onSubmit={loginSubmit}>
                 <div class="inserthere">
                     <label>Username </label>

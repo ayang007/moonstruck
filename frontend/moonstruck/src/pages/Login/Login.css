@@ -2,55 +2,72 @@
     width: 300px;
     backdrop-filter: blur(8px);
     box-shadow: 0px 10px 15px rgb(0 0 0 / 20%);
-    background-color: rgba(228, 228, 255, 0.052);
+    background-color: #e3b8c8;
     border-radius: 10%;
-    padding: 70px;
+    padding: 60px;
     position: relative;
+    box-shadow: 6px 10px 16px #6616ad,-6px -8px 16px #bde0fe;
+    margin: 10px;
 }
 .inserthere input{
-    color: white;
+    color: black;
     font-size: 15px;
     width: 100%;
     padding: 0 5x;
     height: 40x;
     border:none ;
-    background: none;
+    border-radius: 5%;
+    background: #cc81d2;
     outline: none;
 }
 .inserthere label{
     position: absolute;
     top: 100%;
     left: 5px;
-    color: #ffc8dd;
+    color: #cc81d2;
     font-size: 16px;
     pointer-events: none;
 }
 form .inserthere{
     position: relative;
     margin: 30px 0;
-    border-bottom: 2px solid #ffc8dd;
+    border-bottom: 2px solid black;
 }
 .main h1{
-    color:#ffc8dd;
+    color:#cc81d2;
+    background-color:black;
+    width:100px;
+    padding:10px;
+    border-radius: 8%;
 }
-input[type=submit]{
-    font-size: 16px;
-    color:#ffc8dd;
+.main input[type=submit]{
+    font-size: 20px;
+    color:black;
     position:relative;
     left:250px;
-    top: 20px;
-    border:none;
-    background:none;
+    background:#cc81d2;
 }
 .signing label{
     position:relative;
     top: 30px;
-    color:#ffc8dd;
+    color:#cc81d2;
+    border-radius: 8%;
+    padding:4px;
 }
 .signing button{
-    color:#ffc8dd;
-    background:none;
-    border:none;
+    color:black;
+    background:#cc81d2;
     position: relative;
     top: 30px;
+    left:5px;
+    font-size: 16px;
+}
+.backgrounds{
+    
+    background: url(../../assets/Login_Background.jpg);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
 }
