@@ -8,6 +8,7 @@
     position: relative;
     box-shadow: 6px 10px 16px #6616ad,-6px -8px 16px #bde0fe;
     margin: 10px;
+    z-index: 3;
 }
 .inserthere input{
     color: black;
@@ -63,11 +64,22 @@ form .inserthere{
     font-size: 16px;
 }
 .backgrounds{
-    
-    background: url(../../assets/Login_Background.jpg);
     position: fixed;
+    opacity: 2;
     left: 0;
     bottom: 0;
     min-width: 100%;
     min-height: 100%;
+    z-index: 1;
+}
+.hues{
+    background: url(../../assets/galaxy.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
 }
