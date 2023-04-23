@@ -5,9 +5,14 @@
     top: 5vh;
 }
     
-.magpie {
+.magpiecontainer img {
+    position: absolute;
     width: 400px;
     border: 10px;
     cursor:url('../../assets/pointingcursorsmolest.png'), auto !important;
+}
+
+.magpie2 {
+    z-index: 5;
 }
 
