@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../App";
 import {  useNavigate } from "react-router-dom";
 import APIRequest from "../../util/APIRequest";
+import './Login.css'
 
 function Login (props) {
     const navigate = useNavigate();
@@ -37,24 +38,28 @@ function Login (props) {
 
     return (
         <>
-        <h1>Login</h1>
-        <p>My token is {auth}</p>
+        <div class="main">
+            <h1>Login</h1>
+            <p>My token is {auth}</p>
 
-        <form onSubmit={loginSubmit}>
-            <div>
-                <label>Username </label>
-                <input type="text" onChange={(e)=>{setUsername(e.target.value)}} required />
+            <form onSubmit={loginSubmit}>
+                <div class="inserthere">
+                    <label>Username </label>
+                    <input type="text" onChange={(e)=>{setUsername(e.target.value)}} required />
+                </div>
+                <div class="inserthere">
+                    <label>Password </label>
+                    <input type="password" onChange={(e)=>{setPassword(e.target.value)}} required />
+                </div>
+                <div>
+                    <input type="submit" />
+                </div>
+            </form>
+            <div class="signing">
+                <label>No account?</label>
+                <button onClick={()=>{navigate("/register")}}>Sign up</button>
             </div>
-            <div>
-                <label>Password </label>
-                <input type="password" onChange={(e)=>{setPassword(e.target.value)}} required />
-            </div>
-            <div>
-                <input type="submit" />
-            </div>
-        </form>
-        <button onClick={() => {props.setAuth('bar')}}>Change to bar</button>
-        <button onClick={()=>{navigate("/register")}}>Sign up</button>
+        </div>
         </>
     )
 }
