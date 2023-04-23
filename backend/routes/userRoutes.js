@@ -8,7 +8,10 @@ const {
     mergeUser,
     checkMerge,
     getPeriod,
-    setPeriod
+    setPeriod,
+    sendMessage,
+    checkMessage,
+    deleteMessage,
 } = require('../controllers/userController');
 
 const router = express.Router();
@@ -28,5 +31,11 @@ router.get('/auth/:JWT', checkMerge);
 router.get('/period/:JWT', getPeriod);
 
 router.patch('/period', setPeriod);
+
+router.post('/message', sendMessage);
+
+router.get('/message/:JWT', checkMessage);
+
+router.delete('/message/:JWT', deleteMessage);
 
 module.exports = router;
