@@ -93,40 +93,27 @@ const updatePostIt = async (req, res) => {
             })
         }
 
-        // Delete the post-it note
         let bulletinUpdateError = false;
-        const lengthBefore = bulletin.Notes.length;
-        bulletin.Notes = bulletin.Notes.filter((obj) => {
-            return obj._id !== req.body.NoteID
-        })
-        const lengthAfter = bulletin.Notes.length;
 
-        if (lengthBefore === lengthAfter) {
-            return res.status(500).json({
-                'error': 'Note ID does not exist.'
-            });
+        let index = -1;
+        for (let i = 0; i < bulletin.Notes.length; i++) {
+            if (bulletin.Notes[i]._id === req.body.NoteID) {
+                index = i;
+            }
         }
 
-        // Add the post-it note with the same NoteID
-        const _id = req.body.NoteID;
-        const PosX = req.body.PosX || 0;
-        const PosY = req.body.PosY || 0;
-        const Rotation = req.body.Rotation || 0;
-        const Color = req.body.Color;
-        const Type = req.body.Type;
-        const Content = req.body.Content;
+        if (index === -1) {
+            return res.status(500).json({
+                'error': 'Note ID not found.'
+            })
+        }
 
-        const newPostIt = new PostIt({
-            _id,
-            PosX,
-            PosY,
-            Rotation,
-            Color,
-            Type,
-            Content
-        });
-
-        bulletin.Notes.push(newPostIt);
+        bulletin.Notes[index].PosX = req.body.PosX;
+        bulletin.Notes[index].PosY = req.body.PosY;
+        bulletin.Notes[index].Rotation = req.body.Rotation;
+        bulletin.Notes[index].Color = req.body.Color;
+        bulletin.Notes[index].Type = req.body.Type;
+        bulletin.Notes[index].Content = req.body.Content;
 
         bulletin.save().catch(() => bulletinUpdateError = true);
 
