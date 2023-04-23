@@ -19,6 +19,12 @@ function PostIts (props) {
 
     const [delPending, setDelPending] = useState(false);
 
+    useEffect(() => {
+        console.log("WOHOO")
+        setPosX((props.mx/100.0)*window.screen.width);
+        setPosY((props.my/100.0)*window.screen.height);
+    }, [props.mx, props.my])
+
     function useDebounce(value, delay) {
         const [debouncedValue, setDebouncedValue] = useState(value);
     

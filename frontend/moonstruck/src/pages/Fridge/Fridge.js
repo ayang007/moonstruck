@@ -29,7 +29,7 @@ function Fridge (props) {
         try {
             const response = await APIRequest('GET', 'bb/' + auth, {});
             if('Notes' in response) {
-                setBbList(response.Notes);
+                setBbList([...response.Notes]);
                 console.log(response.Notes);
             }
         }
@@ -48,7 +48,8 @@ function Fridge (props) {
                 Color: color,
                 Type: "text", // "text" or "image"
                 Content: noteText, 
-            })
+            });
+            fetchBB();
         }
         catch(error) {
             alert("We were not able to post your post it! Try again later");
