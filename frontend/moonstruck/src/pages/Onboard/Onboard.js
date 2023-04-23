@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../App";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -41,6 +41,12 @@ function Onboard (props) {
 
     }
 
+    useEffect(() => {
+        if(browserGeo[0] && browserGeo[1]) {
+            sendLocation();
+        }
+    }, [browserGeo]);
+
     async function checkPartner() {
         try {
             const response = await APIRequest('GET', 'users/auth/' + auth, {});
@@ -71,6 +77,7 @@ function Onboard (props) {
     }
 
     async function sendMeet() {
+        console.log("Sendmeet")
         try {
             const response = await APIRequest('POST', 'bb/countdown', {
                 JWT: auth,
@@ -104,7 +111,6 @@ function Onboard (props) {
               console.error(error);
             }
           );
-        sendLocation();
     }
 
     return(
