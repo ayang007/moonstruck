@@ -100,7 +100,7 @@ const registerUser = async (req, res) => {
             Password,
             Latitude,
             Longitude,
-            LocationLastUpdated,
+            LocationLastUpdated
         });
 
         const token = jwt.sign({
@@ -173,10 +173,18 @@ const mergeUser = async (req, res) => {
         const Notes = [];
         const TotalNotes = 0;
 
+        let Period = [];
+
+        // Initialize the period calendar; an array with 35 booleans
+        for (let i = 0; i < 35; i++) {
+            Period.push(false);
+        }
+
         const newBulletinBoard = new Bulletin({
             _id,
             Notes,
-            TotalNotes
+            TotalNotes,
+            Period
         });
 
         // Try to update both the user and the partner
@@ -252,11 +260,123 @@ const checkMerge = async (req, res) => {
     }
 }
 
+const getPeriod = async (req, res) => {
+    try {
+        const decoded = jwt.verify(req.params.JWT, process.env.SECRET);
+        const user = await User.findOne({
+            Username: decoded.Username
+        })
+
+        // User ID does not exist
+        if (!user) {
+            return res.status(500).json({
+                'error': 'Username is invalid.'
+            })
+        }
+
+        // Username does not have a partner
+        if (!user.PartnerID) {
+            return res.status(500).json({
+                'error': 'User does not have a partner'
+            })
+        }
+
+        if (!user.BB || !user.PartnerID) {
+            return res.status(500).json({
+                'error': 'User does not have a partner.'
+            })
+        }
+
+        const bulletin = await Bulletin.findOne({
+            _id: user.BB
+        })
+
+        if (!bulletin) {
+            return res.status(500).json({
+                'error': 'Bulletin is invalid.'
+            })
+        }
+
+        const BBPeriod = bulletin.Period;
+
+        return res.status(200).json({
+            "Period": BBPeriod
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            'error': error
+        })
+    }
+}
+
+const setPeriod = async (req, res) => {
+    try {
+        const decoded = jwt.verify(req.body.JWT, process.env.SECRET);
+        const user = await User.findOne({
+            Username: decoded.Username
+        })
+
+        // User ID does not exist
+        if (!user) {
+            return res.status(500).json({
+                'error': 'Username is invalid.'
+            })
+        }
+
+        if (req.body.Period.length !== 35) {
+            return res.status(500).json({
+                'error': 'Period calendars have 35 days.'
+            });
+        }
+
+        if (!user.BB || !user.PartnerID) {
+            return res.status(500).json({
+                'error': 'User does not have a partner.'
+            })
+        }
+
+        const bulletin = await Bulletin.findOne({
+            _id: user.BB
+        })
+
+        if (!bulletin) {
+            return res.status(500).json({
+                'error': 'Bulletin is invalid.'
+            })
+        }
+
+        let bulletinUpdateError = false;
+        bulletin.Period = req.body.Period;
+
+        bulletin.save().catch(() => bulletinUpdateError = true);
+
+        if (bulletinUpdateError) {
+            return res.status(500).json({
+                'error': 'Error updating bulletin document.'
+            });
+        }
+
+        return res.status(200).json({
+            "OK": 'OK'
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            'error': error
+        })
+    }
+}
+
+
+
 module.exports = {
     addUser,
     getUser,
     login,
     registerUser,
     mergeUser,
-    checkMerge
+    checkMerge,
+    getPeriod,
+    setPeriod
 }

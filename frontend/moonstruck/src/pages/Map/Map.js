@@ -80,7 +80,7 @@ function Map (props) {
     return (
         <>
             <div class="mapcontainer">
-                <span>Last Updated: {time2TimeAgo(locData.LastUpdated)}</span>
+                <span class="highlighttext">Last Updated: {time2TimeAgo(locData.LastUpdated)}</span>
                     <div id="mapbackground">
                         <MapContainer className="map" center={[locData.Latitude, locData.Longitude]} zoom={5} scrollWheelZoom={false}>
                         <ChangeView center={[locData.Latitude, locData.Longitude]} zoom={5} /> 
@@ -95,7 +95,7 @@ function Map (props) {
                             </Marker>
                         </MapContainer>
                     </div>
-               <span>Are you in a new place? Update your own location! 
+               <span class="highlighttext">Are you in a new place? Update your own location! 
                 <button onClick={grabUser}>&#128147;&#128205;</button>
                 (Location given: {browserGeo[0] + ", " + browserGeo[1]})
                 </span>
