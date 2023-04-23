@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema(
         Password: { type: String, required: true },
         PartnerID: { type: String, required: false },
         BB: { type: String, required: false },
-        Latitude: { type: mongoose.Schema.Types.Decimal128, required: true },
-        Longitude: { type: mongoose.Schema.Types.Decimal128, required: true },
+        Latitude: { type: Number, required: true },
+        Longitude: { type: Number, required: true },
         LocationLastUpdated: { type: Number, required: true},
         PartnerMessage: { type: String, required: false },
         PartnerOpenDate: { type: Number, required: false }
