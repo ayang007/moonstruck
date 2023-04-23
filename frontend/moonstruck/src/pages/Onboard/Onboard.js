@@ -1,9 +1,13 @@
-import { useState } from "react";
-
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../App";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import APIRequest from "../../util/APIRequest";
+import {  useNavigate } from "react-router-dom";
+
 
 function Onboard (props) {
+    const navigate = useNavigate();
     const [found, setFound] = useState(false);
     const [partnerName, setPartnerName] = useState("");
     const [browserGeo, setBrowserGeo] = useState([null, null]);
@@ -11,16 +15,95 @@ function Onboard (props) {
     const [meetDate, setMeetDate] = useState(new Date());
     const [dateAcquired, setDateAcquired] = useState(false);
 
+    const auth = useContext(AuthContext);
+
     function mergeSubmit(e) {
         e.preventDefault();
+        mergeRequest();
     }
 
     function meetSubmit(e) {
         e.preventDefault();
+        sendMeet();
     }
 
-    function grabUser() {
-        navigator.geolocation.getCurrentPosition(
+    async function sendLocation() {
+        try {
+            const response = await APIRequest('PUT', 'loc', {
+                JWT: auth,
+                Latitude: browserGeo[0].toString(),
+                Longitude: browserGeo[1].toString()
+            })
+        }
+        catch(error) {
+            alert("There was an error sending you location to the server");
+        }
+
+    }
+
+    useEffect(() => {
+        if(browserGeo[0] && browserGeo[1]) {
+            sendLocation();
+        }
+    }, [browserGeo]);
+
+    async function checkPartner() {
+        try {
+            const response = await APIRequest('GET', 'users/auth/' + auth, {});
+            if(response.PartnerID) {
+                setFound(true);
+                setPartnerName(response.PartnerID);
+            }
+            else {
+                setFound(false);
+            }
+        }
+        catch(error) {
+            alert("Error chacking the user for associations")
+        }
+    }
+
+    async function mergeRequest() {
+        try {
+            const response = await APIRequest('PATCH', 'users/auth', {
+                JWT: auth,
+                PartnerID: partnerName
+            });
+            setFound(true);
+        }
+        catch (error) {
+            alert("Couldn't merge! Are you sure the user exists or wasn't taken?")
+        }
+    }
+
+    async function sendMeet() {
+        console.log("Sendmeet")
+        try {
+            const response = await APIRequest('POST', 'bb/countdown', {
+                JWT: auth,
+                Meet: Math.round(meetDate.getTime()/1000)
+            });
+            checkMeet();
+        }
+        catch (error) {
+            alert("Couldn't send meeting date")
+        }
+    }
+
+    async function checkMeet() {
+        try {
+            const response = await APIRequest('GET', 'bb/countdown/' + auth, {})
+            if(response.Meet) {
+                setDateAcquired(true);
+            }
+        }
+        catch(error) {
+            alert("Couldn't query server for meeting date. ")
+        }
+    }
+
+    async function grabUser() {
+        await navigator.geolocation.getCurrentPosition(
             (position) => {
               setBrowserGeo([position.coords.latitude, position.coords.longitude]);
             },
@@ -40,9 +123,9 @@ function Onboard (props) {
                     <input type="submit" />
                 </div>
                 <div>
-                    <label>{found? <>Found your partner: </> : 
+                    <label>{found? <>Found your partner: {partnerName}</> : 
                     <>You are not matched with anyone yet...</> }</label>
-                    <button onClick={()=>{setFound(!found)}}>Refresh</button>
+                    <button onClick={checkPartner}>Refresh</button>
                 </div>
                 <div>
                     
@@ -62,9 +145,9 @@ function Onboard (props) {
                     <input type="submit" />
                 </div>
                 <div>
-                    <label>{dateAcquired? <>Found a date: </> : 
+                    <label>{dateAcquired? <>Found a date!</> : 
                     <>No date set yet...</> }</label>
-                    <button onClick={()=>{setDateAcquired(!dateAcquired)}}>Refresh</button>
+                    <button onClick={checkMeet}>Refresh</button>
                 </div>
                 <div>
                     
@@ -72,6 +155,7 @@ function Onboard (props) {
             </form>
 
         <h2>Please complete all steps!</h2>
+        {found && dateAcquired && <button onClick={()=>navigate('/dashboard')}>Next</button>}
         </>
     )
 }

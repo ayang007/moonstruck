@@ -133,6 +133,13 @@ const mergeUser = async (req, res) => {
             })
         }
 
+        // User passed in themselves as the partner
+        if (decoded.Username === req.body.PartnerID) {
+            return res.status(500).json({
+                'error': 'Partner has the same ID as this user.'
+            })
+        }
+
         // User already has a partner
         if (user.PartnerID) {
             return res.status(500).json({
@@ -164,10 +171,12 @@ const mergeUser = async (req, res) => {
         console.log(bulletinID);
         
         const Notes = [];
+        const TotalNotes = 0;
 
         const newBulletinBoard = new Bulletin({
             _id,
-            Notes
+            Notes,
+            TotalNotes
         });
 
         // Try to update both the user and the partner

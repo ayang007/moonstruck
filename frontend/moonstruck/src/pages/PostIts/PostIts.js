@@ -75,7 +75,9 @@ function PostIts (props) {
             transform: "rotate(" + props.mr + "deg)" }}
       onMouseDown={dragMouseDown}>
                 
-                    <p class="postitmessage"><span class="postit-x" onClick={deletePostIt}>X</span>
+                    <p class="postitmessage">&#12288;&#12288;&#12288;&#12288;
+                        <span class="postit-x" onClick={deletePostIt}>
+                        X</span>
                     <br/>{props.message}</p>
             </div>
         </>

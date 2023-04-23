@@ -13,8 +13,10 @@ html {
   background-attachment: fixed;
   background-size: cover;
   
-
+  cursor: url('./assets/handcursorsmolest.png'), auto;
 }
+
+  
 
 .App {
   width: 100vw;
@@ -22,9 +24,21 @@ html {
   font-family: 'Roboto Mono', monospace;
 }
 
-.default {
-
+.pointable:hover {
+  cursor: url('./assets/grabcursorsmolest.png'), auto;
 }
+
+.grabbable {
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: url('./assets/grabcursorsmolest.png'), auto;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.movable {
+  cursor: url('./assets/grabcursorsmolest.png'), auto;
+}
+
 /*
 .App-logo {
   height: 40vmin;

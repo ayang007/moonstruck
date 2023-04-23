@@ -1,14 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import APIRequest from '../../util/APIRequest';
+import { AuthContext } from "../../App";
+
 import './Countdown.css'
 
 function Countdown (props) {
-    const nextTime = 1703314346;
+    const [nextTime, setNextTime] = useState(0);
 
     const [deltaArr, setDeltaArr] = useState([null, null, null, null, null]);
 
-    function deltaCalc(d) {
+    const auth = useContext(AuthContext);
 
-        const remainingTime = d - Math.floor(Date.now() / 1000); // calculate remaining time in seconds
+    function deltaCalc() {
+        //console.log("my notion of timestamp is " + nextTime);
+        if (nextTime <= 0) return ["00","00","00","00","00"];
+        const remainingTime = nextTime - Math.floor(Date.now() / 1000); // calculate remaining time in seconds
+        //console.log("time diff: " + remainingTime);
         const months = Math.floor(remainingTime / 2592000); // calculate remaining months
         const days = Math.floor((remainingTime % 2592000) / 86400); // calculate remaining days
         const hours = Math.floor((remainingTime % 86400) / 3600); // calculate remaining hours
@@ -20,11 +27,30 @@ function Countdown (props) {
     }
 
     useEffect(() => {
-        const interval = setInterval(() => setDeltaArr(deltaCalc(nextTime)), 1000);
+
+        const interval = setInterval(() => setDeltaArr(deltaCalc()), 1000);
         return () => {
           clearInterval(interval);
         };
-      }, []);
+      }, [nextTime]);
+
+    async function getCountdown() {
+        try {
+            const response = await APIRequest('GET', 'bb/countdown/' + auth, {});
+            if(response.Meet) {
+                console.log(response.Meet);
+                setNextTime(response.Meet);
+            }
+        }
+        catch(error) {
+            // silently fail
+        }
+    }
+
+    useEffect(() => {
+        getCountdown();
+    }, [nextTime]);
+
     return (
         <div class="countdownouter">
             <div class="countdowncontainer">

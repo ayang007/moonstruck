@@ -1,18 +1,20 @@
 import blobmaskimg from '../../assets/Blob_Mask_blackandwhite.svg'
-import heartgif from '../../assets/beatingheart2.gif'
-import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
+import { AuthContext } from "../../App";
+import {MapContainer, TileLayer, Marker, Popup, useMap} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import './Map.css'
 import L from 'leaflet';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import APIRequest from '../../util/APIRequest';
 
 function Map (props) {
     const [browserGeo, setBrowserGeo] = useState([null, null]);
-    const locData = {
+    const auth = useContext(AuthContext);
+    const [locData, setLocData] = useState({
         "Latitude": 51.505,
         "Longitude": -0.09,
         "LastUpdated": 1682183801 // UNIX timstamp
-    }
+    })
     const myIcon = L.icon({
         iconUrl: require('../../assets/beatingheart2.gif'),
         iconSize: [64,64],
@@ -23,8 +25,8 @@ function Map (props) {
         shadowAnchor: [0, 0],
     });
 
-    function grabUser() {
-        navigator.geolocation.getCurrentPosition(
+    async function grabUser() {
+        await navigator.geolocation.getCurrentPosition(
             (position) => {
               setBrowserGeo([position.coords.latitude, position.coords.longitude]);
             },
@@ -33,12 +35,55 @@ function Map (props) {
             }
           );
     }
+
+    useEffect(() => {
+        if(browserGeo[0] && browserGeo[1]) {
+            sendLocation();
+        }
+    }, [browserGeo]);
+
+    async function sendLocation() {
+        try {
+            const response = await APIRequest('PUT', 'loc', {
+                JWT: auth,
+                Latitude: browserGeo[0].toString(),
+                Longitude: browserGeo[1].toString()
+            })
+        }
+        catch(error) {
+            alert("There was an error sending you location to the server");
+        }
+    }
+
+    async function getPartnerLocation() {
+        try {
+            const response = await APIRequest('GET', 'loc/' + auth, {});
+            if(response.Latitude && response.Longitude && response.LastUpdated) {
+                setLocData(response)
+            }
+        }
+        catch(error) {
+            // fail silently
+        }
+    }
+
+    useEffect(() => {
+        getPartnerLocation();
+    }, [])
+
+    function ChangeView({ center, zoom }) {
+        const map = useMap();
+        map.setView(center, zoom);
+        return null;
+      }
+
     return (
         <>
             <div class="mapcontainer">
                 <span>Last Updated: {time2TimeAgo(locData.LastUpdated)}</span>
                     <div id="mapbackground">
                         <MapContainer className="map" center={[locData.Latitude, locData.Longitude]} zoom={5} scrollWheelZoom={false}>
+                        <ChangeView center={[locData.Latitude, locData.Longitude]} zoom={5} /> 
                             <TileLayer
                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

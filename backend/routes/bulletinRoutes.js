@@ -2,6 +2,7 @@ const express = require('express');
 
 const {
     addPostIt,
+    updatePostIt,
     deletePostIt,
     getAllPostIts,
     setCountdown,
@@ -11,6 +12,8 @@ const {
 const router = express.Router();
 
 router.put('/', addPostIt);
+
+router.patch('/', updatePostIt);
 
 router.delete('/', deletePostIt);
 

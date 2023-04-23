@@ -1,6 +1,6 @@
 .postitscontainer {
     position: absolute;
-    cursor:move;
+    cursor:url('../../assets/grabcursorsmolest.png'), auto;;
     width: 10vh;
     height: 10vh;
     background-image: url('../../assets/postit1.png') !important;
