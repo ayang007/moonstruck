@@ -67,7 +67,7 @@ function Fridge (props) {
     return (
         <>
             <div class="fridge-container">
-                <img onClick={()=>{setShowWiz(!showWiz)}} class="fridge" src={fridgeimg}></img>
+                <img onClick={()=>{setShowWiz(!showWiz)}} class="fridge" src={fridgeimg} draggable="false"></img>
                 <div class="fridge-inline">
                 { showWiz &&
                 <form class="glass" onSubmit={noteSubmit}>

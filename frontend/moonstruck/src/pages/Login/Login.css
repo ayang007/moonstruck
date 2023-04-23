@@ -7,9 +7,25 @@
     padding: 60px;
     position: relative;
     box-shadow: 6px 10px 16px #6616ad,-6px -8px 16px #bde0fe;
-    margin: 10px;
+    margin: 30px;
     z-index: 3;
 }
+
+.titlecard {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background-color: #ffcbde16;
+    backdrop-filter: blur(3px);
+    box-shadow: 6px 10px 16px #6616ad,-6px -8px 16px #bde0fe;
+    border-radius: 10%;
+    padding: 6px;
+    margin: 30px;
+    right: 0;
+    top: 0;
+    z-index: 3;
+}
+
 .inserthere input{
     color: black;
     font-size: 15px;

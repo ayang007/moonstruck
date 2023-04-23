@@ -26,9 +26,7 @@ function Dashboard (props) {
  
     return (
         <>
-        <button class="dashboard-onb" onClick={()=>navigate('/onboard')}>
-        <img width="40" height="40" src={gearimg} />
-        </button>
+        <img class="dashboard-onb" onClick={()=>navigate('/onboard')} width="50" height="50" src={gearimg} />
             <div class="toppanel">
                 <Magpie/>
                 <Countdown/>

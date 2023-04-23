@@ -2,10 +2,17 @@
     position: absolute;
 
     left: 0;
-    top: 5vh;
+    top: 3vh;
 }
     
-.magpie {
+.magpiecontainer img {
+    position: absolute;
     width: 400px;
     border: 10px;
+    cursor:url('../../assets/pointingcursorsmolest.png'), auto !important;
 }
+
+.magpie2 {
+    z-index: 5;
+}
+
