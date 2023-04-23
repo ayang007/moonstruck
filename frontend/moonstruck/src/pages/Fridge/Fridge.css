@@ -19,3 +19,38 @@
     top: 40px;
     left: 40px;
   }
+  .color-selector {
+    width: 156.25px;
+    height: 31.25px;
+    position: absolute;
+    left: -3px;
+    bottom: -20px;
+    background-color: white;
+}
+.color-selector tr {
+    background-color: rgb(255, 255, 255);
+    color: white;
+}
+.color-selector td:nth-child(1) {
+    background-color:#cdb4db
+}
+.color-selector td:nth-child(2) {
+    background-color:#ffc8dd
+}
+.color-selector td:nth-child(3) {
+    background-color:#ffafcc
+}
+.color-selector td:nth-child(4) {
+    background-color:#bde0fe
+}
+.color-selector td:nth-child(5) {
+    background-color:#a2d1ff
+}
+input[type=submit] {
+    position: relative;
+    top: 50px;
+}
+input[type=color] {
+    position: relative;
+    top: 2px;
+}

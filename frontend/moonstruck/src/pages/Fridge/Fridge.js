@@ -27,6 +27,15 @@ function Fridge (props) {
                     </div>
                     <div>
                         <label>Color </label>
+                        <table class="color-selector">
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                        </table>
                         <input type="color" onChange={(e)=>{setColor(e.target.value)}} required />
                     </div>
                     <div>
