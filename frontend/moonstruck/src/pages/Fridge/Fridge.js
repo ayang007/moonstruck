@@ -20,7 +20,7 @@ function Fridge (props) {
                 <img onClick={()=>{setShowWiz(!showWiz)}} class="fridge" src={fridgeimg}></img>
                 <div class="fridge-inline">
                 { showWiz &&
-                <form onSubmit={noteSubmit}>
+                <form class="glass" onSubmit={noteSubmit}>
                     <div>
                         <label>Message </label>
                         <input type="text" onChange={(e)=>{setNoteText(e.target.value)}} required />
