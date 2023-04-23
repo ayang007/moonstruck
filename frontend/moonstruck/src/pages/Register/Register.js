@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../App";
 import APIRequest from "../../util/APIRequest";
 import {  useNavigate } from "react-router-dom";
-
-
+import './Register.css';
+import couple from '../../assets/Login_Background.jpg';
 function Register (props) {
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
@@ -42,29 +42,31 @@ function Register (props) {
 
     return (
         <>
-        <h1>Register</h1>
-        <p>My token is {auth}</p>
+        <div class="backhues"></div>
+        <img class="coupbackground" src={couple}></img>
+        <div class="mainreg">
+            <h1>Register</h1>
 
-        <form onSubmit={regSubmit}>
-            <div>
-                <label>Username </label>
-                <input type="text" onChange={(e)=>{setUsername(e.target.value)}} required />
-            </div>
-            <div>
-                <label>Password </label>
-                <input type="password" onChange={(e)=>{setPassword(e.target.value)}} required />
-            </div>
-            <div>
-                <label>Confirm </label>
-                <input type="password" onChange={(e)=>{setConfirm(e.target.value)}} required />
-            </div>
-            <div>
-                <input type="submit" />
-            </div>
-        </form>
+            <form onSubmit={regSubmit}>
+                <div class="insertreg">
+                    <label>Username </label>
+                    <input type="text" onChange={(e)=>{setUsername(e.target.value)}} required />
+                </div>
+                <div class="insertreg">
+                    <label>Password </label>
+                    <input type="password" onChange={(e)=>{setPassword(e.target.value)}} required />
+                </div>
+                <div class="insertreg">
+                    <label>Confirm Password</label>
+                    <input type="password" onChange={(e)=>{setConfirm(e.target.value)}} required />
+                </div>
+                <div>
+                    <input type="submit" />
+                </div>
+            </form>
+        </div>
         </>
-
-    )
+    );
 }
 
 export default Register;
