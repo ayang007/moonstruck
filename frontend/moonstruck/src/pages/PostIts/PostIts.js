@@ -54,9 +54,9 @@ function PostIts (props) {
     
     function elementDrag(e) {
         if (e.clientX < window.screen.width && e.clientX >= 0)
-            setPosX(e.clientX);
+            setPosX(e.clientX-20);
         if (e.clientY >= 0)
-            setPosY(e.clientY);
+            setPosY(e.clientY-20);
     }
     
     function closeDragElement() {
