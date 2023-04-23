@@ -3,6 +3,7 @@ import dayimg from '../../assets/day.png'
 import nightimg from '../../assets/night.png'
 import windowimg from '../../assets/Window.png'
 import sunimg from '../../assets/sun.png'
+import moonimg from '../../assets/moon.png'
 import cloudimg from '../../assets/clouds.png'
 import rainimg from '../../assets/rain.png'
 import curtainsimg from '../../assets/curtains.GIF'
@@ -47,7 +48,8 @@ function Map (props) {
                 <img src={curtainsimg} class="curtains"/>
                 {wData.day&&<img src={dayimg} class="sky"/>}
                 {!wData.day&&<img src={nightimg} class="sky"/>}
-                <img src={sunimg} class="sky"/>
+                {wData.day&&<img src={sunimg} class="sky"/>}
+                {!wData.day&&<img src={moonimg} class="sky" />}
                 {wData.clouds&&<img src={cloudimg} class="clouds"/>}
                 {wData.rain&&<img src={rainimg} class="rain"/>}
             </div>
