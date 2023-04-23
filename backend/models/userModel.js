@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema(
         BB: { type: String, required: false },
         Latitude: { type: Number, required: true },
         Longitude: { type: Number, required: true },
-        LocationLastUpdated: { type: Number, required: true}
+        LocationLastUpdated: { type: Number, required: true},
+        Period: { type: [Boolean], required: true }
     },
     { collection: 'user-data' }
 )
