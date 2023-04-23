@@ -1,7 +1,28 @@
 import './Timezone.css'
+import { AuthContext } from "../../App";
+import { useContext, useEffect, useState } from 'react';
+import APIRequest from '../../util/APIRequest';
+
 
 function Timezone (props) {
-    const diff = -3;
+    const auth = useContext(AuthContext);
+    const [diff, setDiff] = useState(0);
+
+    async function getDiff() {
+        try {
+            const response = await APIRequest('GET', 'tz/' + auth, {});
+            if('HourDelta' in response) {
+                setDiff(response.HourDelta);
+            }
+        }
+        catch (error) {
+            // quietly fail 
+        }
+    }
+
+    useEffect(() => {
+        getDiff();
+    }, [])
 
     function diff2Deg(d) {
         if(d < 0) {
