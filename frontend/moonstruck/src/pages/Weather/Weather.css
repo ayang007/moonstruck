@@ -40,6 +40,7 @@
 }
 
 .rain {
+    opacity: 0.5;
     overflow: hidden;
     width: 210px;
     top: 20px;

@@ -4,7 +4,7 @@ import nightimg from '../../assets/night.png'
 import windowimg from '../../assets/Window.png'
 import sunimg from '../../assets/sun.png'
 import cloudimg from '../../assets/clouds.png'
-import rainimg from '../../assets/rain.png'
+import rainimg from '../../assets/Rain.png'
 import './Weather.css'
 
 function Map (props) {
