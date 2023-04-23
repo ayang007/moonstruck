@@ -2,7 +2,7 @@ import './Timezone.css'
 import { AuthContext } from "../../App";
 import { useContext, useEffect, useState } from 'react';
 import APIRequest from '../../util/APIRequest';
-
+import centerclockimg from '../../assets/24hourticks.png'
 
 function Timezone (props) {
     const auth = useContext(AuthContext);
@@ -34,8 +34,10 @@ function Timezone (props) {
         <>
             <span class="tz-center">Your partner is {diff < 0? (-1*diff) + " hours behind" : diff + " hours ahead"}</span>
             <div class="timezone-out">
+                <div class="circle"></div>
+                <img class="centerclock" src={centerclockimg}/>
                 <div class="timezone-in">
-                    <div class="pie" style={{"--p":58, "--s":"0deg", "--c": "#ffc8dd"}}> 24h</div>
+                    <div class="pie" style={{"--p":58, "--s":"0deg", "--c": "#ffc8dd"}}></div>
                     
                 </div>
                 <div class="timezone-in">
