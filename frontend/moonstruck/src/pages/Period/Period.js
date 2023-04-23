@@ -13,12 +13,13 @@ function PeriodCalendar (props) {
         var parrC = parr.slice();
         parrC[i] = !parrC[i];
         setParr(parrC);
-        updatePeriod();
+        updatePeriod(parrC);
     }
 
     useEffect(() => {
         fetchPeriod();
-    }, [])
+    }, []);
+
 
     async function fetchPeriod() {
         try {
@@ -32,17 +33,17 @@ function PeriodCalendar (props) {
         }
     }
 
-    async function updatePeriod() {
+    async function updatePeriod(parrC) {
         try {
+            console.log("Updating with:" + parrC);
             const result = await APIRequest('PATCH', 'users/period', {
                 JWT: auth,
-                Period: parr
+                Period: parrC
             })
         }
         catch(error) {
             alert("Your cycles were not updated!");
         }
-        fetchPeriod();
     }
     return (
         <>

@@ -42,6 +42,11 @@ function Onboard (props) {
     }
 
     useEffect(() => {
+        checkMeet();
+        checkPartner();
+    }, [])
+
+    useEffect(() => {
         if(browserGeo[0] && browserGeo[1]) {
             sendLocation();
         }
