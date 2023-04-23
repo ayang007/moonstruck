@@ -3,6 +3,7 @@ import { AuthContext } from "../../App";
 import {  useNavigate } from "react-router-dom";
 import APIRequest from "../../util/APIRequest";
 import './Login.css'
+import lovers from '../../assets/Login_Background.jpg';
 function Login (props) {
     const navigate = useNavigate();
     const auth = useContext(AuthContext);
@@ -37,7 +38,8 @@ function Login (props) {
 
     return (
         <>
-        <div class="backgrounds"></div>
+        <div class="hues"></div>
+        <img class="backgrounds" src={lovers}></img>
         <div class="main">
             <h1>Login</h1>
             <form onSubmit={loginSubmit}>
