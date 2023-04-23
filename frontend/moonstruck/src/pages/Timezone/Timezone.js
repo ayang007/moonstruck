@@ -48,10 +48,10 @@ function Timezone (props) {
             </div>
             
             <span class="tz-center">
-                <span style={{color: "#4e2da8"}}>{"None "}</span>
-                <span style={{color: "#a37fc4"}}>{"You "} </span>
-                <span style={{color: "#8281d2"}}>{"Partner "} </span>
-                <span style={{color: "#acabe0"}}>{"Both "} </span>
+                <span style={{color: "#4e2da8"}}>{"None "}&#12288;</span>
+                <span style={{color: "#a37fc4"}}>{"You "}&#12288;</span>
+                <span style={{color: "#8281d2"}}>{"Partner "}&#12288;</span>
+                <span style={{color: "#acabe0"}}>{"Both "}&#12288;</span>
             </span>
         </>
     )
