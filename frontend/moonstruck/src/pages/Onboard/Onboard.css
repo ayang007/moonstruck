@@ -1,0 +1,66 @@
+#myVideo {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    opacity: 2;
+    z-index: 1;
+  }
+
+.onboardcontainer{
+    position: fixed;
+    color: #cc81d2;
+    z-index: 3;
+    height: 90vh;
+    background-color: #e3b8c8;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    width: 400px;
+    box-shadow: 6px 10px 16px #6616ad,-6px -8px 16px #bde0fe;
+    backdrop-filter: blur 2px;
+}
+
+.onboardtext h1 label {
+    color: #cc81d2;
+}
+
+.form1 {
+    border: 10px #cc81d2;
+    z-index: 3;
+}
+
+.onboardtext {
+    background-color: black;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 0 10px 2px 10px;
+}
+
+.textinputonboard, textarea {
+    background-color: #cc81d2;
+    border-radius: 4px;
+}
+
+.onboardcontainer input .button{
+    background-color: #cc81d2;
+    border-radius: 4px;
+}
+
+.particle {
+	position: absolute;
+ 	border-radius: 50%;
+}
+
+.backgroundhues {
+    background: url(../../assets/galaxy.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+}
