@@ -1,8 +1,51 @@
 .weathercontainer {
     float: right;
     width: 300px;
+    height: 250px;
     padding: 10px;
-    background-color: lineargra;
+    border: 10px red solid;
+    background-size: cover;
+    z-index: 0;
+    position:relative;
+}
+
+.window {
+    width: 300;
+    height: 250px;
+    z-index: 100;
+    position: absolute;
+}
+
+.sky {
+    width: 210px;
+    height: 230px;
+    top: 20px;
+    left: 35px;
+    z-index: 1;
+    position: absolute;
+}
+
+.light {
+
+}
+
+.clouds {
+    opacity: 0.5;
+    overflow: hidden;
+    height: 230px;
+    top: 20px;
+    left: 35px;
+    z-index: 2;
+    position: absolute;
+}
+
+.rain {
+    overflow: hidden;
+    width: 210px;
+    top: 20px;
+    left: 35px;
+    z-index: 2;
+    position: absolute;
 }
     
 .weather {
