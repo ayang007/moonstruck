@@ -7,10 +7,10 @@ import Register from './pages/Register/Register';
 import { createContext, useState } from 'react';
 import Onboard from './pages/Onboard/Onboard';
 
-const AuthContext = createContext('foo');
+const AuthContext = createContext('');
 // USE URL with # like http://localhost:3000/#/login
 function App() {
-  const [auth, setAuth] = useState('foo');
+  const [auth, setAuth] = useState('');
   return (
     <div className="App">
       <AuthContext.Provider value={auth}>

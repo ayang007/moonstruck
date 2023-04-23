@@ -5,10 +5,24 @@ import Magpie from "../Magpie/Magpie";
 import Map from "../Map/Map";
 import PeriodCalendar from "../Period/Period";
 import Weather from "../Weather/Weather";
+import { AuthContext } from "../../App";
+
 
 import './Dashboard.css'
+import { useNavigate } from "react-router";
+import { useContext, useEffect } from "react";
 
 function Dashboard (props) {
+    const auth = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!auth) {
+            navigate('/login');
+        }
+    }, []);
+    
+ 
     return (
         <>
             <div class="toppanel">
@@ -41,6 +55,7 @@ function Dashboard (props) {
 
         </>
     )
+
 }
 
 export default Dashboard;
