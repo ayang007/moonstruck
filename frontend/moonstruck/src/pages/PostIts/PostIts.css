@@ -10,7 +10,7 @@
 }
 
 .postit-x {
-    cursor:pointer;
+    cursor:url('../../assets/pointingcursorsmolest.png'), auto !important;
 }
 
 .postitmessage {
