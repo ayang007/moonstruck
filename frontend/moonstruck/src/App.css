@@ -19,6 +19,8 @@ html {
 
 button {
   cursor: url('./assets/pointingcursorsmolest.png'), auto;
+  background-color: #cc81d2;
+  border-radius: 4px;
 }
 
 input[type=submit] {
