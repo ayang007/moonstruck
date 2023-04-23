@@ -35,7 +35,8 @@
 
   .timezone-out .circle {
     position: absolute;
-    left: 76px;
+    left: 50%;
+   transform: translateX(-50%);
     top: 8px;
     width: 160px;
     height: 160px;
@@ -46,7 +47,8 @@
 
   .centerclock {
     position: absolute;
-    left: 107px;
+    left: 50%;
+   transform: translateX(-50%);
     top: 37px;
     width: 100px;
     height: 100px;
