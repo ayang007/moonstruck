@@ -93,12 +93,6 @@ const registerUser = async (req, res) => {
         const Latitude = 0;
         const Longitude = 0;
         const LocationLastUpdated = Math.floor(Date.now() / 1000);
-        let Period = [];
-
-        // Initialize the period calendar; an array with 35 booleans
-        for (let i = 0; i < 35; i++) {
-            Period.push(false);
-        }
 
         const newUser = new User({
             _id,
@@ -106,8 +100,7 @@ const registerUser = async (req, res) => {
             Password,
             Latitude,
             Longitude,
-            LocationLastUpdated,
-            Period
+            LocationLastUpdated
         });
 
         const token = jwt.sign({
@@ -180,10 +173,18 @@ const mergeUser = async (req, res) => {
         const Notes = [];
         const TotalNotes = 0;
 
+        let Period = [];
+
+        // Initialize the period calendar; an array with 35 booleans
+        for (let i = 0; i < 35; i++) {
+            Period.push(false);
+        }
+
         const newBulletinBoard = new Bulletin({
             _id,
             Notes,
-            TotalNotes
+            TotalNotes,
+            Period
         });
 
         // Try to update both the user and the partner
@@ -280,26 +281,26 @@ const getPeriod = async (req, res) => {
             })
         }
 
-        const partner = await User.findOne({
-            Username: user.PartnerID
+        if (!user.BB || !user.PartnerID) {
+            return res.status(500).json({
+                'error': 'User does not have a partner.'
+            })
+        }
+
+        const bulletin = await Bulletin.findOne({
+            _id: user.BB
         })
 
-        // Partner ID does not exist
-        if (!partner) {
+        if (!bulletin) {
             return res.status(500).json({
-                'error': 'Partner is invalid.'
+                'error': 'Bulletin is invalid.'
             })
         }
 
-        // Username does not have a partner
-        if (!partner.Period) {
-            return res.status(500).json({
-                'error': 'Partner does not have a period calendar'
-            })
-        }
+        const BBPeriod = bulletin.Period;
 
         return res.status(200).json({
-            "Period": partner.Period
+            "Period": BBPeriod
         })
 
     } catch (error) {
@@ -329,16 +330,30 @@ const setPeriod = async (req, res) => {
             });
         }
 
-        // Try to update both the user and the partner
-        user.Period = req.body.Period;
-        
-        let userUpdateError = false;
-
-        user.save().catch(() => userUpdateError = true);
-
-        if (userUpdateError) {
+        if (!user.BB || !user.PartnerID) {
             return res.status(500).json({
-                'error': 'Error updating user document.'
+                'error': 'User does not have a partner.'
+            })
+        }
+
+        const bulletin = await Bulletin.findOne({
+            _id: user.BB
+        })
+
+        if (!bulletin) {
+            return res.status(500).json({
+                'error': 'Bulletin is invalid.'
+            })
+        }
+
+        let bulletinUpdateError = false;
+        bulletin.Period = req.body.Period;
+
+        bulletin.save().catch(() => bulletinUpdateError = true);
+
+        if (bulletinUpdateError) {
+            return res.status(500).json({
+                'error': 'Error updating bulletin document.'
             });
         }
 
@@ -352,6 +367,8 @@ const setPeriod = async (req, res) => {
         })
     }
 }
+
+
 
 module.exports = {
     addUser,
