@@ -49,7 +49,7 @@ function PeriodCalendar (props) {
         <>
             <div class="periodcontainer">
                 <p>CYCLE TRACKER</p>
-                <img class="period" src={periodimg}></img>
+                <img class="period" src={periodimg} draggable="false"></img>
                 <div class="table-calendar">
                     <table>
                         {
