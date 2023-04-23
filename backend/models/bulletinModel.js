@@ -15,6 +15,7 @@ const bulletinSchema = new mongoose.Schema(
     {
         _id: { type: String, required: true },
         Notes: [postItSchema],
+        TotalNotes: { type: Number, required: true },
         Countdown: { type: Number, required: false }
     },
     { collection: 'bulletin-data' }
