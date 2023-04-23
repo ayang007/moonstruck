@@ -368,6 +368,130 @@ const setPeriod = async (req, res) => {
     }
 }
 
+const sendMessage = async (req, res) => {
+    try {
+        const decoded = jwt.verify(req.body.JWT, process.env.SECRET);
+        const user = await User.findOne({
+            Username: decoded.Username
+        })
+
+        // User ID does not exist
+        if (!user) {
+            return res.status(500).json({
+                'error': 'Username is invalid.'
+            })
+        }
+
+        const partner = await User.findOne({
+            Username: user.PartnerID
+        })
+
+        // Partner ID does not exist
+        if (!partner) {
+            return res.status(500).json({
+                'error': 'Partner is invalid.'
+            })
+        }
+
+        let partnerUpdateError = false;
+        partner.PartnerMessage = req.body.Message;
+        partner.PartnerOpenDate = req.body.OpenDate;
+
+        partner.save().catch(() => partnerUpdateError = true);
+
+        if (partnerUpdateError) {
+            return res.status(500).json({
+                'error': 'Error updating partner document.'
+            });
+        }
+
+        return res.status(200).json({
+            "OK": 'OK'
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            'error': error
+        })
+    }
+}
+
+const checkMessage = async (req, res) => {
+    try {
+        const decoded = jwt.verify(req.params.JWT, process.env.SECRET);
+        const user = await User.findOne({
+            Username: decoded.Username
+        })
+
+        // User ID does not exist
+        if (!user) {
+            return res.status(500).json({
+                'error': 'Username is invalid.'
+            })
+        }
+
+        if (!user.PartnerMessage || !user.PartnerOpenDate) {
+            return res.status(200).json({
+                'Message': "",
+                "OpenDate": -1
+            })
+        }
+
+        return res.status(200).json({
+            "Message": user.PartnerMessage,
+            "OpenDate": user.PartnerOpenDate
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            'error': error
+        })
+    }
+}
+
+const deleteMessage = async (req, res) => {
+    try {
+        const decoded = jwt.verify(req.params.JWT, process.env.SECRET);
+        const user = await User.findOne({
+            Username: decoded.Username
+        })
+
+        // User ID does not exist
+        if (!user) {
+            return res.status(500).json({
+                'error': 'Username is invalid.'
+            })
+        }
+
+        if (!user.PartnerMessage || !user.PartnerOpenDate) {
+            return res.status(200).json({
+                "OK": "OK"
+            })
+        }
+
+        let userUpdateError = false;
+        user.PartnerMessage = undefined;
+        user.PartnerOpenDate = undefined;
+
+        user.save().catch(() => userUpdateError = true);
+
+        if (userUpdateError) {
+            return res.status(500).json({
+                'error': 'Error updating partner document.'
+            });
+        }
+
+        return res.status(200).json({
+            "OK": "OK"
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            'error': error
+        })
+    }
+}
+
 
 
 module.exports = {
@@ -378,5 +502,8 @@ module.exports = {
     mergeUser,
     checkMerge,
     getPeriod,
-    setPeriod
+    setPeriod,
+    sendMessage,
+    checkMessage,
+    deleteMessage
 }

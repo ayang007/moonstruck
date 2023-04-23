@@ -6,10 +6,14 @@ import sunimg from '../../assets/sun.png'
 import cloudimg from '../../assets/clouds.png'
 import rainimg from '../../assets/rain.png'
 import './Weather.css'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import { AuthContext } from "../../App";
+import APIRequest from '../../util/APIRequest'
+
 
 function Map (props) {
     const [showTip, setShowTip] = useState(false);
+    const auth = useContext(AuthContext);
     const [wData, setWData] = useState({
         rain: false, // false: no rain, true: rain
         clouds: true, // false: no clouds, true: clouds
@@ -17,6 +21,22 @@ function Map (props) {
         description: "scattered clouds", // Short description
         temperature: "55.11" // Temperature in Fahrenheit
     });
+
+    useEffect(() => {
+        fetchWeather();
+    },[])
+
+    async function fetchWeather() {
+        try {
+            const result = await APIRequest('GET', 'weather/' + auth, {});
+            if("rain" in result && "temperature" in result) {
+                setWData(result);
+            }
+        }
+        catch(error) {
+            // silently ignore 
+        }
+    }
     return (
         <>
             {showTip&&<div class="weatherclick">{wData.description}
