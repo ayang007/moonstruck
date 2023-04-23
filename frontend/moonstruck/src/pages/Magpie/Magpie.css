@@ -1,6 +1,7 @@
 .magpiecontainer {
-    float: left;
-    left: 0vw;
+    position: absolute;
+
+    left: 0;
     top: 5vh;
 }
     

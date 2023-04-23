@@ -1,6 +1,9 @@
 .countdownouter {
     align-items: center;
     display: flex;
+    position: absolute;
+    right: 10px;
+    top: 20px;
 }
 div.container {
     text-align: center;
@@ -8,14 +11,14 @@ div.container {
 .countdowncontainer {
     border-radius: 25px;
     height: 100px;
-    width: 900px;
-    position: relative;
-    left: -10%;
+    width: 500px;
+    position: absolute;
+    right: 10px;
     top: 20px;
     color: #cc81d2;
     margin: 0 auto;
     text-align: center;
-    float: left;
+    float: right;
 }
 
 .countdown-h1 {
@@ -39,4 +42,13 @@ div.container {
     display: block;
     font-size: 2.5vw;
     white-space: nowrap;
+    background-color: black;
+    padding: 3px;
+    border-radius: 4px;
+}
+
+#headline {
+    background-color: black;
+    padding: 3px;
+    border-radius: 4px;
 }
