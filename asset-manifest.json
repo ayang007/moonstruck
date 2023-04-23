@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.68166758.css",
-    "main.js": "./static/js/main.80006d6b.js",
+    "main.css": "./static/css/main.1123331e.css",
+    "main.js": "./static/js/main.176c8095.js",
     "static/js/787.fba038ed.chunk.js": "./static/js/787.fba038ed.chunk.js",
     "static/media/night.png": "./static/media/night.71b490eb2a45a0347218.png",
     "static/media/galaxy.png": "./static/media/galaxy.1ed2954181b045eb4921.png",
@@ -16,17 +16,18 @@
     "static/media/Calendar.png": "./static/media/Calendar.9853999cc36e3b92a2fb.png",
     "static/media/Magpie_Notes.png": "./static/media/Magpie_Notes.6f808768f1a6315a8a16.png",
     "static/media/postit1.png": "./static/media/postit1.e1e58a86130ba2dc1d4a.png",
+    "static/media/Login_Background.jpg": "./static/media/Login_Background.7b8ecb6dc55c1ba743bb.jpg",
     "static/media/Weather_Mask.png": "./static/media/Weather_Mask.212a66a3963c1c9638ca.png",
     "static/media/beatingheart2.gif": "./static/media/beatingheart2.f38e00ff3b18aa997209.gif",
     "static/media/Blob_Mask_blackandwhite.svg": "./static/media/Blob_Mask_blackandwhite.7c07c11937328c130c9320ff3070d02c.svg",
     "static/media/logo.svg": "./static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
     "index.html": "./index.html",
-    "main.68166758.css.map": "./static/css/main.68166758.css.map",
-    "main.80006d6b.js.map": "./static/js/main.80006d6b.js.map",
+    "main.1123331e.css.map": "./static/css/main.1123331e.css.map",
+    "main.176c8095.js.map": "./static/js/main.176c8095.js.map",
     "787.fba038ed.chunk.js.map": "./static/js/787.fba038ed.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.68166758.css",
-    "static/js/main.80006d6b.js"
+    "static/css/main.1123331e.css",
+    "static/js/main.176c8095.js"
   ]
 }
