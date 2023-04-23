@@ -6,7 +6,9 @@ const {
     login,
     registerUser,
     mergeUser,
-    checkMerge
+    checkMerge,
+    getPeriod,
+    setPeriod
 } = require('../controllers/userController');
 
 const router = express.Router();
@@ -22,5 +24,9 @@ router.put('/auth', registerUser);
 router.patch('/auth', mergeUser);
 
 router.get('/auth/:JWT', checkMerge);
+
+router.get('/period/:JWT', getPeriod);
+
+router.patch('/period', setPeriod);
 
 module.exports = router;

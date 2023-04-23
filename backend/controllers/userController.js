@@ -93,6 +93,12 @@ const registerUser = async (req, res) => {
         const Latitude = 0;
         const Longitude = 0;
         const LocationLastUpdated = Math.floor(Date.now() / 1000);
+        let Period = [];
+
+        // Initialize the period calendar; an array with 35 booleans
+        for (let i = 0; i < 35; i++) {
+            Period.push(false);
+        }
 
         const newUser = new User({
             _id,
@@ -101,6 +107,7 @@ const registerUser = async (req, res) => {
             Latitude,
             Longitude,
             LocationLastUpdated,
+            Period
         });
 
         const token = jwt.sign({
@@ -252,11 +259,107 @@ const checkMerge = async (req, res) => {
     }
 }
 
+const getPeriod = async (req, res) => {
+    try {
+        const decoded = jwt.verify(req.params.JWT, process.env.SECRET);
+        const user = await User.findOne({
+            Username: decoded.Username
+        })
+
+        // User ID does not exist
+        if (!user) {
+            return res.status(500).json({
+                'error': 'Username is invalid.'
+            })
+        }
+
+        // Username does not have a partner
+        if (!user.PartnerID) {
+            return res.status(500).json({
+                'error': 'User does not have a partner'
+            })
+        }
+
+        const partner = await User.findOne({
+            Username: user.PartnerID
+        })
+
+        // Partner ID does not exist
+        if (!partner) {
+            return res.status(500).json({
+                'error': 'Partner is invalid.'
+            })
+        }
+
+        // Username does not have a partner
+        if (!partner.Period) {
+            return res.status(500).json({
+                'error': 'Partner does not have a period calendar'
+            })
+        }
+
+        return res.status(200).json({
+            "Period": partner.Period
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            'error': error
+        })
+    }
+}
+
+const setPeriod = async (req, res) => {
+    try {
+        const decoded = jwt.verify(req.body.JWT, process.env.SECRET);
+        const user = await User.findOne({
+            Username: decoded.Username
+        })
+
+        // User ID does not exist
+        if (!user) {
+            return res.status(500).json({
+                'error': 'Username is invalid.'
+            })
+        }
+
+        if (req.body.Period.length !== 35) {
+            return res.status(500).json({
+                'error': 'Period calendars have 35 days.'
+            });
+        }
+
+        // Try to update both the user and the partner
+        user.Period = req.body.Period;
+        
+        let userUpdateError = false;
+
+        user.save().catch(() => userUpdateError = true);
+
+        if (userUpdateError) {
+            return res.status(500).json({
+                'error': 'Error updating user document.'
+            });
+        }
+
+        return res.status(200).json({
+            "OK": 'OK'
+        })
+
+    } catch (error) {
+        return res.status(500).json({
+            'error': error
+        })
+    }
+}
+
 module.exports = {
     addUser,
     getUser,
     login,
     registerUser,
     mergeUser,
-    checkMerge
+    checkMerge,
+    getPeriod,
+    setPeriod
 }
